@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  seen: 1
+  lenght: 1
+  relasedate: MyText
+  rating: 1
+  description: MyText
+
+two:
+  name: MyText
+  seen: 1
+  lenght: 1
+  relasedate: MyText
+  rating: 1
+  description: MyText

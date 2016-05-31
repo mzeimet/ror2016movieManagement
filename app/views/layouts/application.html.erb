@@ -11,6 +11,8 @@
   <p class="alert"><%= alert %></p>
 
 <%= yield %>
-
+<% if !params[:controller].match("devise/*") %>
+   <%= render 'layouts/logInOut' %>
+<% end %>
 </body>
 </html>

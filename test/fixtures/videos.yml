@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  videoType: MyString
+  name: MyString
+  seen: false
+  length: 1
+  cover: MyString
+  release: 2016-06-02 20:15:52
+  raiting: 1
+  summary: MyText
+  ageRating: 1
+  note: MyText
+
+two:
+  videoType: MyString
+  name: MyString
+  seen: false
+  length: 1
+  cover: MyString
+  release: 2016-06-02 20:15:52
+  raiting: 1
+  summary: MyText
+  ageRating: 1
+  note: MyText

@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Videotype:</strong>
+  <%= @video.videoType %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @video.name %>
+</p>
+
+<p>
+  <strong>Seen:</strong>
+  <%= @video.seen %>
+</p>
+
+<p>
+  <strong>Length:</strong>
+  <%= @video.length %>
+</p>
+
+<p>
+  <strong>Cover:</strong>
+  <%= @video.cover %>
+</p>
+
+<p>
+  <strong>Release:</strong>
+  <%= @video.release %>
+</p>
+
+<p>
+  <strong>Raiting:</strong>
+  <%= @video.raiting %>
+</p>
+
+<p>
+  <strong>Summary:</strong>
+  <%= @video.summary %>
+</p>
+
+<p>
+  <strong>Agerating:</strong>
+  <%= @video.ageRating %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @video.note %>
+</p>
+
+<%= link_to 'Edit', edit_video_path(@video) %> |
+<%= link_to 'Back', videos_path %>

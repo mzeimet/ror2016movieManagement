@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :episodes
+  resources :seasons
+  resources :series
+  resources :platforms
+  resources :locations
+  resources :genres
+  resources :actors
+  resources :regisseurs
   resources :videos
   devise_for :users
   get 'welcome/index'

@@ -15,17 +15,19 @@ class VideosController < ApplicationController
   # GET /videos/new
   def new
     @video = Video.new
+    @actors_available = Actor.all
   end
 
   # GET /videos/1/edit
   def edit
+    @actors_available = Actor.all
   end
 
   # POST /videos
   # POST /videos.json
   def create
     @video = Video.new(video_params)
-
+    @actors_available = Actor.all
     respond_to do |format|
       if @video.save
         format.html { redirect_to @video, notice: 'Video was successfully created.' }
@@ -69,6 +71,6 @@ class VideosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
-      params.require(:video).permit(:videoType, :name, :seen, :length, :cover, :release, :raiting, :summary, :ageRating, :note)
+      params.require(:video).permit(:videoType, :name, :seen, :length, :cover, :release, :raiting, :summary, :ageRating, :note, :actors => [:id, :name])
     end
 end

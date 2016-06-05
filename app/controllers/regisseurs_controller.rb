@@ -1,5 +1,6 @@
 class RegisseursController < ApplicationController
   before_action :set_regisseur, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only:  [:new, :edit, :create, :update, :destroy]
 
   # GET /regisseurs
   # GET /regisseurs.json

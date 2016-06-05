@@ -1,3 +1,4 @@
+<div class="container">
 <%= form_for(@video) do |f| %>
   <% if @video.errors.any? %>
     <div id="error_explanation">
@@ -33,7 +34,7 @@
   </div>
   <div class="field">
     <%= f.label :release %><br>
-    <%= f.datetime_select :release %>
+    <%= f.date_select :release %>
   </div>
   <div class="field">
     <%= f.label :raiting %><br>
@@ -51,7 +52,11 @@
     <%= f.label :note %><br>
     <%= f.text_area :note %>
   </div>
+  <div class="field">
+    <%= f.label :actors %><br>
+    <%= f.select :actors, options_from_collection_for_select(@actors_available, :id, :name), {}, {:multiple => true } %>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+</div>

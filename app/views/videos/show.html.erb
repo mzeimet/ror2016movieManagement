@@ -49,6 +49,11 @@
   <strong>Note:</strong>
   <%= @video.note %>
 </p>
-
+<p>
+  <strong> Actors:</strong>
+  <%= @video.actors.each do |f| %>
+    f.name
+  <% end %>
+</p>
 <%= link_to 'Edit', edit_video_path(@video) %> |
 <%= link_to 'Back', videos_path %>

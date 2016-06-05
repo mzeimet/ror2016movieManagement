@@ -11,7 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602184822) do
+ActiveRecord::Schema.define(version: 20160604154648) do
+
+  create_table "Actors_Videos", id: false, force: :cascade do |t|
+    t.integer "video_id", null: false
+    t.integer "actor_id", null: false
+  end
 
   create_table "actors", force: :cascade do |t|
     t.string   "name"
@@ -91,7 +96,7 @@ ActiveRecord::Schema.define(version: 20160602184822) do
     t.boolean  "seen"
     t.integer  "length"
     t.string   "cover"
-    t.datetime "release"
+    t.date     "release"
     t.integer  "raiting"
     t.text     "summary"
     t.integer  "ageRating"

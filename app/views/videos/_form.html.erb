@@ -52,7 +52,7 @@
     <%= f.label :note %><br>
     <%= f.text_area :note %>
   </div>
-  <div class="field">
+  <div>
     <%= f.label :actors %><br>
     <%= select_tag "actors_ids", options_from_collection_for_select(@actors_available, 'id', 'name', @video.actors.map{ |a| a.id}), {:multiple => true } %>
   <div class="actions">

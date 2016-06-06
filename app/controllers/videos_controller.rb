@@ -45,7 +45,7 @@ class VideosController < ApplicationController
     respond_to do |format|
       @actors = Actor.where(:id => params[:actors_ids])
       @video.actors.destroy_all
-           @video.actors << @actors
+      @video.actors << @actors
       if @video.update(video_params)
         format.html { redirect_to @video, notice: 'Video was successfully updated.' }
         format.json { render :show, status: :ok, location: @video }
@@ -74,6 +74,6 @@ class VideosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
-      params.require(:video).permit(:videoType, :name, :seen, :length, :cover, :release, :raiting, :summary, :ageRating, :note, :actors =>[])
+      params.require(:video).permit(:videoType, :name, :seen, :length, :cover, :release, :raiting, :summary, :ageRating, :note, :actors_ids =>[])
     end
 end

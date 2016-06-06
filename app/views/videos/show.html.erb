@@ -51,8 +51,8 @@
 </p>
 <p>
   <strong> Actors:</strong>
-  <%= @video.actors.each do |f| %>
-    f.name
+  <% @video.actors.each do |f| %>
+    <%= f.name %>
   <% end %>
 </p>
 <%= link_to 'Edit', edit_video_path(@video) %> |

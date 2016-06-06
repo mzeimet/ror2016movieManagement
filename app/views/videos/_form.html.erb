@@ -54,7 +54,7 @@
   </div>
   <div class="field">
     <%= f.label :actors %><br>
-    <%= f.select :actors, options_from_collection_for_select(@actors_available, :id, :name), {}, {:multiple => true } %>
+    <%= select_tag "actors_ids", options_from_collection_for_select(@actors_available, 'id', 'name', @video.actors.map{ |a| a.id}), {:multiple => true } %>
   <div class="actions">
     <%= f.submit %>
   </div>

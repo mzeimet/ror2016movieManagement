@@ -17,6 +17,8 @@ class VideosController < ApplicationController
     @video = Video.new
     @actors_available = Actor.all
     @genres_available = Genre.all
+    @video.build_location
+  #  @video.location = Location.new
   end
 
   # GET /videos/1/edit
@@ -82,6 +84,6 @@ class VideosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
-      params.require(:video).permit(:videoType, :name, :seen, :length, :cover, :release, :raiting, :summary, :ageRating, :note, :actors =>[], :genres =>[])
+      params.require(:video).permit(:videoType, :name, :seen, :length, :cover, :release, :raiting, :summary, :ageRating, :note, :actors =>[], :genres =>[], location_attributes: [:description])
     end
 end

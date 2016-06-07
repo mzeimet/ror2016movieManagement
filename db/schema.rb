@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160607133441) do
+ActiveRecord::Schema.define(version: 20160607180351) do
 
   create_table "actors", force: :cascade do |t|
     t.string   "name"
@@ -46,7 +46,10 @@ ActiveRecord::Schema.define(version: 20160607133441) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "video_id"
   end
+
+  add_index "locations", ["video_id"], name: "index_locations_on_video_id"
 
   create_table "platforms", force: :cascade do |t|
     t.string   "name"
@@ -54,7 +57,10 @@ ActiveRecord::Schema.define(version: 20160607133441) do
     t.datetime "borrowedDate"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "location_id"
   end
+
+  add_index "platforms", ["location_id"], name: "index_platforms_on_location_id"
 
   create_table "regisseurs", force: :cascade do |t|
     t.string   "name"
@@ -106,8 +112,11 @@ ActiveRecord::Schema.define(version: 20160607133441) do
     t.text     "summary"
     t.integer  "ageRating"
     t.text     "note"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "location_id"
   end
+
+  add_index "videos", ["location_id"], name: "index_videos_on_location_id"
 
 end

@@ -52,13 +52,28 @@
     <%= f.label :note %><br>
     <%= f.text_area :note %>
   </div>
-  <div>
-    <%= f.label :actors %><br>
-    <%= select_tag "actors_ids", options_from_collection_for_select(@actors_available, 'id', 'name', @video.actors.map{ |a| a.id}), {:multiple => true } %>
-  <div>
-    <%= f.label :actors_internal %> <br>
-    <%= f.select :actors_ids,  options_from_collection_for_select(@actors_available, 'id', 'name').map{ |a| a.id},{}, {:multiple => true } %>
-    </div>
+  <div  class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   Actors <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+       <li>
+      <!--   <div class="container"> -->
+           <%= f.select :actors,  options_from_collection_for_select(@actors_available, 'id', 'name'),{}, {:multiple => true } %>
+    <!--    </div> -->
+      </li>
+    </ul>
+  </div>
+  <div  class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   Genres <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+       <li>
+           <%= f.select :genres,  options_from_collection_for_select(@genres_available, 'id', 'name'),{}, {:multiple => true } %>
+      </li>
+    </ul>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

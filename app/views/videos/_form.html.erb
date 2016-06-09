@@ -52,12 +52,25 @@
     <%= f.label :note %><br>
     <%= f.text_area :note %>
   </div>
-  <div class="field">
     <%= f.fields_for :location do |location| %>
         <%= location.label :location %><br>
         <%= location.text_area :description %>
+        <%= location.fields_for :platforms do |platform| %>
+          <div class="field">
+          <p> Platform </p>
+          <%= platform.label :name %><br>
+          <%= platform.text_field :name %>
+          </div>
+          <div class="field">
+          <%= platform.label :borrowed %><br>
+          <%= platform.check_box :borrowed %>
+          </div>
+          <div class="field">
+          <%= platform.label :borrowedDate %><br>
+          <%= platform.date_field :borrowedDate %>
+          </div>
+        <% end %>
       <% end %>
-  </div>
   <div  class="btn-group">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
    Actors <span class="caret"></span>

@@ -20,6 +20,7 @@ class PlatformsController < ApplicationController
 
   # GET /platforms/1/edit
   def edit
+    @video = @platform.video
   end
 
   # POST /platforms

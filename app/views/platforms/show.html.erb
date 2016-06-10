@@ -14,6 +14,14 @@
   <strong>Borroweddate:</strong>
   <%= @platform.borrowedDate %>
 </p>
+<p>
+  <strong> Location: </strong>
+  <%= @platform.location.description %><br>
+</p>
+<p>
+  <strong> Video: </strong>
+  <%= @platform.location.video.name %><br>
+</p>
 
 <%= link_to 'Edit', edit_platform_path(@platform) %> |
 <%= link_to 'Back', platforms_path %>

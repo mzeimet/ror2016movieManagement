@@ -71,6 +71,10 @@
           </div>
         <% end %>
       <% end %>
+  <div class="field">
+    <%= f.label :regisseurs %>
+     <%= f.select :regisseurs,  options_from_collection_for_select( Regisseur.all, 'id', 'name'),{}, {:multiple => true } %>
+  </div>"
   <div  class="btn-group">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
    Actors <span class="caret"></span>
@@ -78,7 +82,7 @@
     <ul class="dropdown-menu" role="menu">
        <li>
       <!--   <div class="container"> -->
-           <%= f.select :actors,  options_from_collection_for_select(@actors_available, 'id', 'name'),{}, {:multiple => true } %>
+           <%= f.select :actors,  options_from_collection_for_select(Actor.all, 'id', 'name'),{}, {:multiple => true } %>
     <!--    </div> -->
       </li>
     </ul>
@@ -89,7 +93,7 @@
     </button>
     <ul class="dropdown-menu" role="menu">
        <li>
-           <%= f.select :genres,  options_from_collection_for_select(@genres_available, 'id', 'name'),{}, {:multiple => true } %>
+           <%= f.select :genres,  options_from_collection_for_select( Genre.all, 'id', 'name'),{}, {:multiple => true } %>
       </li>
     </ul>
   </div>

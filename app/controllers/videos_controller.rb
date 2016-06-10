@@ -15,26 +15,24 @@ class VideosController < ApplicationController
   # GET /videos/new
   def new
     @video = Video.new
-    @actors_available = Actor.all
-    @genres_available = Genre.all
     @video.build_location
     @video.location.platforms.build
   end
 
   # GET /videos/1/edit
   def edit
-    @actors_available = Actor.all
-    @genres_available = Genre.all
   end
 
   # POST /videos
   # POST /videos.json
   def create
-    @video = Video.new(video_params.except(:actors).except(:genres))
+    @video = Video.new(video_params.except(:actors).except(:genres).except(:regisseurs))
     @actors = Actor.where(:id => video_params[:actors])
     @genres = Genre.where(:id => video_params[:genres])
+    @regisseurs = Regisseur.where(:id => video_params[:regisseurs])
     @video.actors << @actors
     @video.genres << @genres
+    @video.regisseurs << @regisseurs
     respond_to do |format|
       if @video.save
         format.html { redirect_to @video}
@@ -56,7 +54,10 @@ class VideosController < ApplicationController
       @genres = Genre.where(:id => video_params[:genres])
       @video.genres.destroy_all
       @video.genres << @genres
-      if @video.update(video_params.except(:actors).except(:genres))
+      @regisseurs = Regisseur.where(:id => video_params[:regisseurs])
+      @video.regisseurs.destroy_all
+      @video.regisseurs << @regisseurs
+      if @video.update(video_params.except(:actors).except(:genres).except(:regisseurs))
         format.html { redirect_to @video}
         format.json { render :show, status: :ok, location: @video }
       else
@@ -84,6 +85,6 @@ class VideosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
-      params.require(:video).permit(:videoType, :name, :seen, :length, :cover, :release, :raiting, :summary, :ageRating, :note, :actors =>[], :genres =>[], location_attributes: [:description, :id, platforms_attributes: [:name, :borrowed, :borrowedDate, :id]])
+      params.require(:video).permit(:videoType, :name, :seen, :length, :cover, :release, :raiting, :summary, :ageRating, :note, :actors =>[], :genres =>[], :regisseurs =>[], location_attributes: [:description, :id, platforms_attributes: [:name, :borrowed, :borrowedDate, :id]])
     end
 end

@@ -21,7 +21,7 @@
   <tbody>
     <% @videos.each do |video| %>
       <tr>
-        <td><%= video.videoType %></td>
+        <td><% if video.videoType < 2 %> Movie <% else %> Episode <% end %> </td>
         <td><%= video.name %></td>
         <td><%= video.seen %></td>
         <td><%= video.length %></td>

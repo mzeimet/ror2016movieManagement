@@ -33,7 +33,12 @@ class VideosController < ApplicationController
     @video.actors << @actors
     @video.genres << @genres
     @video.regisseurs << @regisseurs
-    respond_to do |format|
+    if (video_params[:videoType] = 2 )
+      @episode = Episode.new()
+      @episode.video = @video
+      @episode.save
+    end
+        respond_to do |format|
       if @video.save
         format.html { redirect_to @video}
         format.json { render :show, status: :created, location: @video }

@@ -14,7 +14,7 @@
 
   <div class="field">
     <%= f.label :videoType %><br>
-    <%= f.text_field :videoType %>
+    <%= f.select :videoType, options_for_select([['Movie', 1],['Episode',2]], selected: @video.videoType) %>
   </div>
   <div class="field">
     <%= f.label :name %><br>
@@ -72,18 +72,16 @@
         <% end %>
       <% end %>
   <div class="field">
-    <%= f.label :regisseurs %>
+    <%= f.label :regisseurs %> <br>
      <%= f.select :regisseurs,  options_from_collection_for_select( Regisseur.all, 'id', 'name'),{}, {:multiple => true } %>
-  </div>"
+  </div>
   <div  class="btn-group">
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
    Actors <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu">
        <li>
-      <!--   <div class="container"> -->
            <%= f.select :actors,  options_from_collection_for_select(Actor.all, 'id', 'name'),{}, {:multiple => true } %>
-    <!--    </div> -->
       </li>
     </ul>
   </div>

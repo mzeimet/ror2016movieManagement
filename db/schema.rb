@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160610153446) do
+ActiveRecord::Schema.define(version: 20160611234316) do
 
   create_table "actors", force: :cascade do |t|
     t.string   "name"
@@ -29,7 +29,12 @@ ActiveRecord::Schema.define(version: 20160610153446) do
     t.integer  "episodeNumber"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "video_id"
+    t.integer  "season_id"
   end
+
+  add_index "episodes", ["season_id"], name: "index_episodes_on_season_id"
+  add_index "episodes", ["video_id"], name: "index_episodes_on_video_id"
 
   create_table "genres", force: :cascade do |t|
     t.string   "name"
@@ -79,7 +84,10 @@ ActiveRecord::Schema.define(version: 20160610153446) do
     t.string   "cover"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "series_id"
   end
+
+  add_index "seasons", ["series_id"], name: "index_seasons_on_series_id"
 
   create_table "series", force: :cascade do |t|
     t.string   "name"
@@ -107,7 +115,7 @@ ActiveRecord::Schema.define(version: 20160610153446) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "videos", force: :cascade do |t|
-    t.string   "videoType"
+    t.integer  "videoType"
     t.string   "name"
     t.boolean  "seen"
     t.integer  "length"

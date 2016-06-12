@@ -1,5 +1,13 @@
 <p id="notice"><%= notice %></p>
-
+<div class="container">
+<p>
+  <strong>Series:</strong>
+  <%= @episode.season.series.name %>
+</p>
+<p>
+  <strong>Season Number:</strong>
+  <%= @episode.season.number %>
+</p>
 <p>
   <strong>Episodenumber:</strong>
   <%= @episode.episodeNumber %>
@@ -7,3 +15,4 @@
 
 <%= link_to 'Edit', edit_episode_path(@episode) %> |
 <%= link_to 'Back', episodes_path %>
+</div>

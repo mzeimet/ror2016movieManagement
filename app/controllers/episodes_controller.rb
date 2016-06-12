@@ -11,11 +11,13 @@ class EpisodesController < ApplicationController
   # GET /episodes/1
   # GET /episodes/1.json
   def show
+  #  @video = Video.find(@episode.id)
   end
 
   # GET /episodes/new
   def new
     @episode = Episode.new
+    @episode.season = Season.find(params[:season])
   end
 
   # GET /episodes/1/edit
@@ -25,8 +27,9 @@ class EpisodesController < ApplicationController
   # POST /episodes
   # POST /episodes.json
   def create
-    @episode = Episode.new(episode_params)
-
+    @episode = Episode.new(episode_params.except(:season))
+    @season = Season.find(episode_params[:season])
+    @episode.season = @season
     respond_to do |format|
       if @episode.save
         format.html { redirect_to @episode, notice: 'Episode was successfully created.' }
@@ -42,7 +45,7 @@ class EpisodesController < ApplicationController
   # PATCH/PUT /episodes/1.json
   def update
     respond_to do |format|
-      if @episode.update(episode_params)
+      if @episode.update(episode_params.except(:season))
         format.html { redirect_to @episode, notice: 'Episode was successfully updated.' }
         format.json { render :show, status: :ok, location: @episode }
       else
@@ -70,6 +73,6 @@ class EpisodesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def episode_params
-      params.require(:episode).permit(:episodeNumber)
+      params.require(:episode).permit(:episodeNumber, :season)
     end
 end

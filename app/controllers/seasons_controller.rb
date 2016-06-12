@@ -16,6 +16,7 @@ class SeasonsController < ApplicationController
   # GET /seasons/new
   def new
     @season = Season.new
+    @season.series = Series.find(params[:series])
   end
 
   # GET /seasons/1/edit
@@ -25,8 +26,9 @@ class SeasonsController < ApplicationController
   # POST /seasons
   # POST /seasons.json
   def create
-    @season = Season.new(season_params)
-
+    @season = Season.new(season_params.except(:series))
+    @series = Series.find(season_params[:series])
+    @season.series = @series
     respond_to do |format|
       if @season.save
         format.html { redirect_to @season, notice: 'Season was successfully created.' }
@@ -70,6 +72,6 @@ class SeasonsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def season_params
-      params.require(:season).permit(:number, :cover)
+      params.require(:season).permit(:number, :cover, :series)
     end
 end

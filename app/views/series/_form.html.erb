@@ -1,4 +1,3 @@
-<div class="container">
 <%= form_for(@series) do |f| %>
   <% if @series.errors.any? %>
     <div id="error_explanation">
@@ -18,10 +17,9 @@
   </div>
   <div class="field">
     <%= f.label :cover %><br>
-    <%= f.text_field :cover %>
+    <%= f.file_field :cover%> <br>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit %><br>
   </div>
 <% end %>
-</div>

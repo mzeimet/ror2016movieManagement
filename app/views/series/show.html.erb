@@ -3,11 +3,7 @@
 <h1>
     <%= @series.name %>
 </h1>
-
-<p>
-  <strong>Cover:</strong>
-  <%= @series.cover %>
-</p>
+<%= image_tag @series.cover, height: "400" %>
 <h2>Seasons</h2>
 
 <table  class ="table table-condensed table-bordered">

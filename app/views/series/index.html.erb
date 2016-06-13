@@ -1,7 +1,6 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
 <h1>Series</h1>
-
 <table  class ="table table-condensed table-bordered">
   <thead>
     <tr>
@@ -27,6 +26,6 @@
 </table>
 
 <br>
-
-<%= link_to 'New Series', new_series_path %>
+<p>Add New Series</p>
+<%= link_to '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>'.html_safe , new_series_path %>
 </div>

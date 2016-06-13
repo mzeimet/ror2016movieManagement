@@ -27,6 +27,7 @@
     <% end %>
   </tbody>
 </table>
-
-<%= link_to 'Edit', edit_season_path(@season) %> |
+<p>Add New Episode</p>
+<%= link_to '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>'.html_safe, {:controller => "episodes", :action => "new", :season => @season.id } %><br><br>
+<%= link_to 'Edit', edit_season_path(@season) %>
 <%= link_to 'Back', series_path(@season.series.id) %>

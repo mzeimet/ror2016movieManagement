@@ -44,7 +44,7 @@ class SeasonsController < ApplicationController
   # PATCH/PUT /seasons/1.json
   def update
     respond_to do |format|
-      if @season.update(season_params)
+      if @season.update(season_params.except(:series))
         format.html { redirect_to @season, notice: 'Season was successfully updated.' }
         format.json { render :show, status: :ok, location: @season }
       else

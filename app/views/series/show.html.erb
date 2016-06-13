@@ -33,7 +33,8 @@
     <% end %>
   </tbody>
 </table>
-
+<p> Add Season </p>
+<%= link_to '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>'.html_safe, {:controller => "seasons", :action => "new", :series => @series.id } %><br><br>
 <%= link_to 'Edit', edit_series_path(@series) %> |
 <%= link_to 'Back', series_index_path %>
 </div>

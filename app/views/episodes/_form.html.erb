@@ -1,5 +1,6 @@
 <div class ="container">
-<%= form_for(@episode) do |f| %>
+<%= form_for(@episode) do |episode| %>
+    <%= form_for(@video) do |video| %>
   <% if @episode.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@episode.errors.count, "error") %> prohibited this episode from being saved:</h2>
@@ -10,18 +11,90 @@
       </ul>
     </div>
   <% end %>
+    <% if @video.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@video.errors.count, "error") %> prohibited this episode from being saved:</h2>
+        <ul>
+        <% @video.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
 
   <div class="field">
-    <p><strong>Season:</strong></p>
-    <%=@episode.season.number%>
-    <%= f.hidden_field :season, :value => @episode.season.id%>
+     <h2><%=@episode.season.series.name.to_s() + " Season " +  @episode.season.number.to_s() %></h2>
+    <%= episode.hidden_field :season, :value => @episode.season.id%>
   </div>
   <div class="field">
-    <%= f.label :episodeNumber %><br>
-    <%= f.number_field :episodeNumber %>
+    <%= episode.label :episodeNumber %><br>
+    <%= episode.number_field :episodeNumber %>
+  </div>
+  <%= video.hidden_field :videoType, :value => 2%>
+  <div class="field">
+    <%= video.label :name %><br>
+    <%= video.text_field :name %>
+  </div>
+  <div class="field">
+    <%= video.label :seen %><br>
+    <%= video.check_box :seen %>
+  </div>
+  <div class="field">
+    <%= video.label :length %><br>
+    <%= video.number_field :length %>
+  </div>
+  <div class="field">
+    <%= video.label :release %><br>
+    <%= video.date_select :release %>
+  </div>
+  <div class="field">
+    <%= video.label :raiting %><br>
+    <%= video.number_field :raiting %>
+  </div>
+  <div class="field">
+    <%= video.label :summary %><br>
+    <%= video.text_area :summary %>
+  </div>
+  <div class="field">
+    <%= video.label :note %><br>
+    <%= video.text_area :note %>
+  </div>
+  <%= video.fields_for :location do |location| %>
+      <%= location.label :location %><br>
+      <%= location.text_area :description %>
+      <%= location.fields_for :platforms do |platform| %>
+        <div class="field">
+        <p> Platform </p>
+        <%= platform.label :name %><br>
+        <%= platform.text_field :name %>
+        </div>
+        <div class="field">
+        <%= platform.label :borrowed %><br>
+        <%= platform.check_box :borrowed %>
+        </div>
+        <div class="field">
+        <%= platform.label :borrowedDate %><br>
+        <%= platform.date_field :borrowedDate %>
+        </div>
+      <% end %>
+    <% end %>
+  <div class="field">
+  <%= video.label :regisseurs %> <br>
+  <%= video.select :regisseurs,  options_from_collection_for_select( Regisseur.all, 'id', 'name'),{}, {:multiple => true } %>
+  </div>
+  <div  class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Actors <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li>
+          <%= video.select :actors,  options_from_collection_for_select(Actor.all, 'id', 'name'),{}, {:multiple => true } %>
+      </li>
+    </ul>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= episode.submit %>
   </div>
+  <% end %>
 <% end %>
 </div>

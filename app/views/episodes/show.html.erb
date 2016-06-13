@@ -12,6 +12,64 @@
   <strong>Episodenumber:</strong>
   <%= @episode.episodeNumber %>
 </p>
+<p>
+  <strong>Name:</strong>
+  <%= @video.name %>
+</p>
+
+<p>
+  <strong>Seen:</strong>
+  <%= @video.seen %>
+</p>
+
+<p>
+  <strong>Length:</strong>
+  <%= @video.length %>
+</p>
+
+<p>
+  <strong>Cover:</strong>
+  <%= @video.cover %>
+</p>
+
+<p>
+  <strong>Release Date:</strong>
+  <%= @video.release %>
+</p>
+
+<p>
+  <strong>Raiting:</strong>
+  <%= @video.raiting %>
+</p>
+
+<p>
+  <strong>Summary:</strong>
+  <%= @video.summary %>
+</p>
+<p>
+  <strong>Note:</strong>
+  <%= @video.note %>
+</p>
+<p>
+  <strong> Actors:</strong>
+  <% @video.actors.each do |f| %>
+    <%= f.name %>
+  <% end %>
+</p>
+<p>
+  <strong> Location:</strong>
+  <%= @video.location.description %>
+</p>
+<p>
+    <strong> Platforms:</strong>
+    <% @video.location.platforms.each do |f| %>
+      <strong>Name:</strong>
+      <%=f.name%><br>
+      <strong>borrowed:</strong>
+      <%=f.borrowed%><br>
+      <strong>Borrowed since</strong>
+      <%=f.borrowedDate%><br>
+    <% end %>
 
 <%= link_to 'Edit', edit_episode_path(@episode) %> |
 <%= link_to 'Back', season_path(@episode.season.id) %>

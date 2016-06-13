@@ -58,9 +58,13 @@ class SeasonsController < ApplicationController
   # DELETE /seasons/1.json
   def destroy
     @season.destroy
-    respond_to do |format|
+    if params[:from] == 'series'
+      redirect_to series_path(params[:series_id])
+      else
+      respond_to do |format|
       format.html { redirect_to seasons_url, notice: 'Season was successfully destroyed.' }
       format.json { head :no_content }
+      end
     end
   end
 

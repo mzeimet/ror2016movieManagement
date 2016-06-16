@@ -1,22 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Genres</h1>
+<h1>Genres</h1>
 
-<table>
+<table class ="table table-condensed table-bordered">
   <thead>
     <tr>
       <th>Name</th>
+      <th>#Movies </th>
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @genres.each do |genre| %>
       <tr>
         <td><%= genre.name %></td>
-        <td><%= link_to 'Show', genre %></td>
-        <td><%= link_to 'Edit', edit_genre_path(genre) %></td>
-        <td><%= link_to 'Destroy', genre, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= genre.videos.where(:videoType => 1).size %></td>
+        <td><%= link_to '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'.html_safe, genre %></td>
+        <td><%= link_to '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>'.html_safe, edit_genre_path(genre) %></td>
+        <td><%= link_to '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>'.html_safe, genre, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

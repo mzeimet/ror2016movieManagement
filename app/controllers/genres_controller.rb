@@ -8,6 +8,15 @@ class GenresController < ApplicationController
     @genres = Genre.all
   end
 
+#  Select genre.id, count(*)
+#  FROM (Select *
+#        from videos
+#        join genres_videos
+#        on videos_id = genre_videos.video_id) as firstjoin
+#  JOIN genres
+#    on firstjoin.genre_id = genre.id
+#  GROUP BY genre.id
+
   # GET /genres/1
   # GET /genres/1.json
   def show

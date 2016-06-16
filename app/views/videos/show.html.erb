@@ -1,11 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Videotype:</strong>
-  <%= @video.videoType %>
-</p>
-
-<p>
   <strong>Name:</strong>
   <%= @video.name %>
 </p>
@@ -64,10 +59,6 @@
 <p>
   <strong> Location:</strong>
   <%= @video.location.description %>
-</p>
-<p>
-  <strong> Episode DB id:</strong>
-  <%= @video.episodes.first.id %>
 </p>
 <%= link_to 'Edit', edit_video_path(@video) %> |
 <%= link_to 'Back', videos_path %>

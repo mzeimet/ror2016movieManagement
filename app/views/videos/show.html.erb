@@ -1,5 +1,10 @@
 <p id="notice"><%= notice %></p>
 
+
+<% if !@video.cover.nil? && @video.cover.to_s.length > 0 %>
+  <%= image_tag @video.cover, height: "400" %>
+<%end%>
+
 <p>
   <strong>Name:</strong>
   <%= @video.name %>
@@ -7,17 +12,16 @@
 
 <p>
   <strong>Seen:</strong>
-  <%= @video.seen %>
+  <% if @video.seen %>
+      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+  <%else %>
+      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+  <% end %>
 </p>
 
 <p>
   <strong>Length:</strong>
   <%= @video.length %>
-</p>
-
-<p>
-  <strong>Cover:</strong>
-  <%= @video.cover %>
 </p>
 
 <p>
@@ -28,11 +32,6 @@
 <p>
   <strong>Raiting:</strong>
   <%= @video.raiting %>
-</p>
-
-<p>
-  <strong>Summary:</strong>
-  <%= @video.summary %>
 </p>
 
 <p>
@@ -55,6 +54,10 @@
   <% @video.genres.each do |f| %>
     <%= f.name %>
   <% end %>
+</p>
+<p>
+  <strong>Summary:</strong>
+  <%= @video.summary %>
 </p>
 <p>
   <strong> Location:</strong>

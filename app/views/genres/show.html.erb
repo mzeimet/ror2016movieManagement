@@ -1,9 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @genre.name %>
-</p>
+<h1>Genre <%= @genre.name %> </h1>
+
+<h2>Movies</h2>
+<table class ="table table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Seen</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @genre.videos.each do |video| %>
+      <tr>
+        <td><%= video.name %></td>
+        <td><% if video.seen %>
+              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            <%else %>
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <% end %>
+       </td>
+  </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to 'Edit', edit_genre_path(@genre) %> |
 <%= link_to 'Back', genres_path %>

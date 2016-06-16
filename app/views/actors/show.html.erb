@@ -1,14 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @actor.name %>
-</p>
+<h1><%= @actor.name %></h1>
 
-<p>
-  <strong>Cover:</strong>
-  <%= @actor.cover %>
-</p>
-
+<% if !@actor.cover.nil? && @actor.cover.to_s.length > 0 %>
+  <%= image_tag @actor.cover, height: "400" %>
+<%end%>
+<br>
 <%= link_to 'Edit', edit_actor_path(@actor) %> |
 <%= link_to 'Back', actors_path %>

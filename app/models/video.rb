@@ -11,4 +11,6 @@ class Video < ActiveRecord::Base
   accepts_nested_attributes_for :platforms
   accepts_nested_attributes_for :episodes
 
+  mount_uploader :cover, PictureUploader
+
 end

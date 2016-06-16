@@ -19,17 +19,16 @@
 
 <p>
   <strong>Seen:</strong>
-  <%= @video.seen %>
+  <% if @video.seen %>
+      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+  <%else %>
+      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+  <% end %>
 </p>
 
 <p>
   <strong>Length:</strong>
   <%= @video.length %>
-</p>
-
-<p>
-  <strong>Cover:</strong>
-  <%= @video.cover %>
 </p>
 
 <p>

@@ -12,10 +12,7 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :videoType %><br>
-    <%= f.select :videoType, options_for_select([['Movie', 1],['Episode',2]], selected: @video.videoType) %>
-  </div>
+  <%= f.hidden_field :videoType, :value => 1%>
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
@@ -30,7 +27,7 @@
   </div>
   <div class="field">
     <%= f.label :cover %><br>
-    <%= f.text_field :cover %>
+    <%= f.file_field :cover %>
   </div>
   <div class="field">
     <%= f.label :release %><br>

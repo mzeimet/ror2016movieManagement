@@ -3,7 +3,9 @@
 <h1>
     <%= @series.name %>
 </h1>
-<%= image_tag @series.cover, height: "400" %>
+<% if !@series.cover.nil? && @series.cover.to_s.length > 0 %>
+  <%= image_tag @series.cover, height: "400" %>
+<%end%>
 <h2>Seasons</h2>
 
 <table  class ="table table-condensed table-bordered">

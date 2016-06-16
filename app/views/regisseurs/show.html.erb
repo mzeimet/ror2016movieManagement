@@ -1,14 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @regisseur.name %>
-</p>
-
-<p>
-  <strong>Cover:</strong>
-  <%= @regisseur.cover %>
-</p>
-
+<h1> <%= @regisseur.name %> </h1>
+<% if !@regisseur.cover.nil? && @regisseur.cover.to_s.length > 0 %>
+  <%= image_tag @regisseur.cover, height: "400" %>
+<%end%>
+<br>
 <%= link_to 'Edit', edit_regisseur_path(@regisseur) %> |
 <%= link_to 'Back', regisseurs_path %>

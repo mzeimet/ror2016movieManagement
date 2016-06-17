@@ -1,5 +1,4 @@
-<div class="container">
-<%= form_for(@video) do |f| %>
+<%= bootstrap_form_for(@video) do |f| %>
   <% if @video.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@video.errors.count, "error") %> prohibited this video from being saved:</h2>
@@ -14,86 +13,87 @@
 
   <%= f.hidden_field :videoType, :value => 1%>
   <div class="field">
-    <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :seen %><br>
     <%= f.check_box :seen %>
   </div>
   <div class="field">
-    <%= f.label :length %><br>
     <%= f.number_field :length %>
   </div>
   <div class="field">
-    <%= f.label :cover %><br>
     <%= f.file_field :cover %>
   </div>
   <div class="field">
-    <%= f.label :release %><br>
     <%= f.date_select :release %>
   </div>
   <div class="field">
-    <%= f.label :raiting %><br>
     <%= f.number_field :raiting %>
   </div>
   <div class="field">
-    <%= f.label :summary %><br>
     <%= f.text_area :summary %>
   </div>
   <div class="field">
-    <%= f.label :ageRating %><br>
     <%= f.number_field :ageRating %>
   </div>
   <div class="field">
-    <%= f.label :note %><br>
     <%= f.text_area :note %>
   </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+    <h3> Location </h3>
+    <br>
     <%= f.fields_for :location do |location| %>
-        <%= location.label :location %><br>
         <%= location.text_area :description %>
         <%= location.fields_for :platforms do |platform| %>
-          <div class="field">
-          <p> Platform </p>
-          <%= platform.label :name %><br>
-          <%= platform.text_field :name %>
+        <button type="button" class="btn" data-toggle="collapse" data-target="#platform"> Add Platform</button>
+        <div id="platform" class="panel panel-default collapse">
+          <div class="panel-body">
+            <h4> Platform </h4>
+            <br>
+            <div class="field">
+              <%= platform.select :name, options_for_select([[' '],['Amazon'],['Flickr'],['Hulu'],['Maxdome'],['Netflix'],['Stream general'],['Vimeo'],['Watchever'],['Youtube']]) %>
+            </div>
+            <div class="field">
+            <%= platform.check_box :borrowed %>
+            </div>
+            <div class="field">
+            <%= platform.date_select :borrowedDate %>
+            </div>
           </div>
-          <div class="field">
-          <%= platform.label :borrowed %><br>
-          <%= platform.check_box :borrowed %>
-          </div>
-          <div class="field">
-          <%= platform.label :borrowedDate %><br>
-          <%= platform.date_field :borrowedDate %>
-          </div>
+        </div>
         <% end %>
       <% end %>
-  <div class="field">
-    <%= f.label :regisseurs %> <br>
-     <%= f.select :regisseurs,  options_from_collection_for_select( Regisseur.all, 'id', 'name'),{}, {:multiple => true } %>
+    </div>
   </div>
-  <div  class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   Actors <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" role="menu">
-       <li>
-           <%= f.select :actors,  options_from_collection_for_select(Actor.all, 'id', 'name'),{}, {:multiple => true } %>
-      </li>
-    </ul>
+  <div class="btn-group" role="group" aria-label="">
+    <button type="button" class="btn" data-toggle="collapse" data-target="#regisseurs"> Add Regisseurs</button>
+    <button type="button" class="btn" data-toggle="collapse" data-target="#actors"> Add Actors</button>
+    <button type="button" class="btn" data-toggle="collapse" data-target="#genres"> Add Genres</button>
+  </div><br>
+  <div id="regisseurs" class="panel panel-default collapse">
+    <div class="panel-body">
+      <div class="field">
+        <%= f.select :regisseurs,  options_from_collection_for_select( Regisseur.all, 'id', 'name'),{}, {:multiple => true } %>
+      </div>
+    </div>
   </div>
-  <div  class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   Genres <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" role="menu">
-       <li>
-           <%= f.select :genres,  options_from_collection_for_select( Genre.all, 'id', 'name'),{}, {:multiple => true } %>
-      </li>
-    </ul>
+  <div id="actors" class="panel panel-default collapse">
+    <div class="panel-body">
+      <div class="field">
+        <%= f.select :actors,  options_from_collection_for_select(Actor.all, 'id', 'name'),{}, {:multiple => true } %>
+      </div>
+    </div>
   </div>
+  <div id="genres" class="panel panel-default collapse">
+    <div class="panel-body">
+      <div class="field">
+        <%= f.select :genres,  options_from_collection_for_select( Genre.all, 'id', 'name'),{}, {:multiple => true } %>
+      </div>
+    </div>
+  </div>
+  <br><br><br>
   <div class="actions">
     <%= f.submit %>
-  </div>
+  </div><br><br>
 <% end %>
-</div>

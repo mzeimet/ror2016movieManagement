@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.select :name, options_for_select([['Amazon'],['Flickr'],['Hulu'],['Maxdome'],['Netflix'],['Stream general'],['Vimeo'],['Watchever'],['Youtube']]) %>
   </div>
   <div class="field">
     <%= f.label :borrowed %><br>
@@ -23,7 +23,9 @@
     <%= f.label :borrowedDate %><br>
     <%= f.datetime_select :borrowedDate %>
   </div>
+  <br>
   <div class="actions">
     <%= f.submit %>
   </div>
+  <br>
 <% end %>

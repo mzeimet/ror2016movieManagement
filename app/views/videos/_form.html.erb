@@ -44,7 +44,7 @@
     <h3> Location </h3>
     <br>
     <%= f.fields_for :location do |location| %>
-        <%= location.text_area :description %>
+        <%= location.text_area :description, label:"URL or own description" %>
         <%= location.fields_for :platforms do |platform| %>
         <button type="button" class="btn" data-toggle="collapse" data-target="#platform"> Add Platform</button>
         <div id="platform" class="panel panel-default collapse">
@@ -52,7 +52,7 @@
             <h4> Platform </h4>
             <br>
             <div class="field">
-              <%= platform.select :name, options_for_select([[' '],['Amazon'],['Flickr'],['Hulu'],['Maxdome'],['Netflix'],['Stream general'],['Vimeo'],['Watchever'],['Youtube']]) %>
+              <%= platform.select :name, options_for_select(platform_options(),@video.location.platforms.first.name)%>
             </div>
             <div class="field">
             <%= platform.check_box :borrowed %>

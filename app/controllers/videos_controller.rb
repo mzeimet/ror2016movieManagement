@@ -14,6 +14,7 @@ class VideosController < ApplicationController
 
   # GET /videos/new
   def new
+    @selected = ""
     @video = Video.new
     @video.build_location
     @video.location.platforms.build

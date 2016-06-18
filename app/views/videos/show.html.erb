@@ -26,7 +26,34 @@
 
 <p>
   <strong>Release:</strong>
-  <%= @video.release %>
+  <%= convert_date(@video.release) %>
+</p>
+
+<p>
+  <strong> Genres:</strong>
+  <% @video.genres.each do |f| %>
+    <%= f.name %>
+  <% end %>
+</p>
+
+<p>
+  <strong> Actors:</strong>
+  <% @video.actors.each do |f| %>
+    <%= f.name %>
+  <% end %>
+</p>
+
+<p>
+  <strong>
+    <% if @video.regisseurs.size > 1 %>
+      Regisseurs:
+    <% else %>
+      Regisseur:
+    <% end %>
+  </strong>
+  <% @video.regisseurs.each do |f| %>
+    <%= f.name %>
+  <% end %>
 </p>
 
 <p>
@@ -40,28 +67,29 @@
 </p>
 
 <p>
-  <strong>Note:</strong>
-  <%= @video.note %>
-</p>
-<p>
-  <strong> Actors:</strong>
-  <% @video.actors.each do |f| %>
-    <%= f.name %>
-  <% end %>
-</p>
-<p>
-  <strong> Genres:</strong>
-  <% @video.genres.each do |f| %>
-    <%= f.name %>
-  <% end %>
-</p>
-<p>
   <strong>Summary:</strong>
   <%= @video.summary %>
 </p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @video.note %>
+</p>
+
 <p>
   <strong> Location:</strong>
-  <%= @video.location.description %>
+  <%= @video.location.description %> <br>
 </p>
+
+<p>
+  <strong> Platform: </strong>
+  <% @video.location.platforms.each do |p| %>
+    <%= p.name %>
+    <% if p.borrowed %>
+      , borrowed until <%= convert_date(p.borrowedDate) %>
+    <% end %> <br>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_video_path(@video) %> |
 <%= link_to 'Back', videos_path %>

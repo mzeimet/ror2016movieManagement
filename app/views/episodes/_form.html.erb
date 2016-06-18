@@ -1,100 +1,99 @@
-<div class ="container">
-<%= form_for(@episode) do |episode| %>
-    <%= form_for(@video) do |video| %>
-  <% if @episode.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@episode.errors.count, "error") %> prohibited this episode from being saved:</h2>
-      <ul>
-      <% @episode.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= bootstrap_form_for(@episode) do |episode| %>
+    <%= bootstrap_form_for(@video) do |video| %>
+    <% if @episode.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@episode.errors.count, "error") %> prohibited this episode from being saved:</h2>
+        <ul>
+            <% @episode.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+        </ul>
+      </div>
+    <% end %>
     <% if @video.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@video.errors.count, "error") %> prohibited this episode from being saved:</h2>
         <ul>
-        <% @video.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
+          <% @video.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
         </ul>
       </div>
     <% end %>
 
   <div class="field">
-     <h2><%=@episode.season.series.name.to_s() + " Season " +  @episode.season.number.to_s() %></h2>
+     <h2><%=@episode.season.series.name.to_s() + " Season " +  @episode.season.number.to_s() %></h2><br>
     <%= episode.hidden_field :season, :value => @episode.season.id%>
   </div>
   <div class="field">
-    <%= episode.label :episodeNumber %><br>
     <%= episode.number_field :episodeNumber %>
   </div>
-  <%= video.hidden_field :videoType, :value => 2%>
   <div class="field">
-    <%= video.label :name %><br>
     <%= video.text_field :name %>
   </div>
   <div class="field">
-    <%= video.label :seen %><br>
     <%= video.check_box :seen %>
   </div>
   <div class="field">
-    <%= video.label :length %><br>
-    <%= video.number_field :length %>
-  </div>
-  <div class="field">
-    <%= video.label :release %><br>
     <%= video.date_select :release %>
   </div>
   <div class="field">
-    <%= video.label :raiting %><br>
+    <%= video.number_field :length %>
+  </div>
+  <div class="field">
     <%= video.number_field :raiting %>
   </div>
   <div class="field">
-    <%= video.label :summary %><br>
     <%= video.text_area :summary %>
   </div>
   <div class="field">
-    <%= video.label :note %><br>
     <%= video.text_area :note %>
   </div>
+  <h3> Location </h3>
   <%= video.fields_for :location do |location| %>
-      <%= location.label :location %><br>
-      <%= location.text_area :description %>
+      <%= location.text_area :description, label:"URL or own description" %>
       <%= location.fields_for :platforms do |platform| %>
-        <div class="field">
-        <p> Platform </p>
-        <%= platform.label :name %><br>
-        <%= platform.text_field :name %>
+      <button type="button" class="btn" data-toggle="collapse" data-target="#platform"> Add Platform</button>
+      <div id="platform" class="panel panel-default collapse">
+        <div class="panel-body">
+          <h4> Platform </h4>
+          <br>
+          <div class="field">
+            <%= platform.select :name, options_for_select(platform_options(),@video.location.platforms.first.name)%>
+          </div>
+          <div class="field">
+          <%= platform.check_box :borrowed %>
+          </div>
+          <div class="field">
+          <%= platform.date_select :borrowedDate %>
+          </div>
         </div>
-        <div class="field">
-        <%= platform.label :borrowed %><br>
-        <%= platform.check_box :borrowed %>
-        </div>
-        <div class="field">
-        <%= platform.label :borrowedDate %><br>
-        <%= platform.date_field :borrowedDate %>
-        </div>
+      </div>
       <% end %>
     <% end %>
-  <div class="field">
-  <%= video.label :regisseurs %> <br>
-  <%= video.select :regisseurs,  options_from_collection_for_select( Regisseur.all, 'id', 'name'),{}, {:multiple => true } %>
-  </div>
-  <div  class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Actors <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" role="menu">
-      <li>
+    <div class="btn-group" role="group" aria-label="">
+      <button type="button" class="btn" data-toggle="collapse" data-target="#regisseurs"> Add Regisseurs</button>
+      <button type="button" class="btn" data-toggle="collapse" data-target="#actors"> Add Actors</button>
+    </div><br>
+    <div id="regisseurs" class="panel panel-default collapse">
+      <div class="panel-body">
+        <div class="field">
+          <%= video.select :regisseurs,  options_from_collection_for_select( Regisseur.all, 'id', 'name'),{}, {:multiple => true } %>
+        </div>
+      </div>
+    </div>
+    <div id="actors" class="panel panel-default collapse">
+      <div class="panel-body">
+        <div class="field">
           <%= video.select :actors,  options_from_collection_for_select(Actor.all, 'id', 'name'),{}, {:multiple => true } %>
-      </li>
-    </ul>
-  </div>
+        </div>
+      </div>
+    </div>
+    <br>
+  <%= video.hidden_field :videoType, :value => 2%>
   <div class="actions">
     <%= episode.submit %>
   </div>
+    <br><br><br>
   <% end %>
 <% end %>
-</div>

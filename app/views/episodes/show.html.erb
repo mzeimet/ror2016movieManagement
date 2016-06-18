@@ -19,11 +19,7 @@
 
 <p>
   <strong>Seen:</strong>
-  <% if @video.seen %>
-      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-  <%else %>
-      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-  <% end %>
+    <%=  icon_right_wrong(@video.seen) %>
 </p>
 
 <p>
@@ -33,7 +29,7 @@
 
 <p>
   <strong>Release Date:</strong>
-  <%= @video.release %>
+  <%= convert_date(@video.release) %>
 </p>
 
 <p>
@@ -60,16 +56,14 @@
   <%= @video.location.description %>
 </p>
 <p>
-    <strong> Platforms:</strong>
-    <% @video.location.platforms.each do |f| %>
-      <strong>Name:</strong>
-      <%=f.name%><br>
-      <strong>borrowed:</strong>
-      <%=f.borrowed%><br>
-      <strong>Borrowed since</strong>
-      <%=f.borrowedDate%><br>
-    <% end %>
-
+  <strong> Platform: </strong>
+  <% @video.location.platforms.each do |p| %>
+    <%= p.name %>
+    <% if p.borrowed %>
+      , borrowed until <%= convert_date(p.borrowedDate) %>
+    <% end %> <br>
+  <% end %>
+</p>
 <%= link_to 'Edit', edit_episode_path(@episode) %> |
 <%= link_to 'Back', season_path(@episode.season.id) %>
 </div>

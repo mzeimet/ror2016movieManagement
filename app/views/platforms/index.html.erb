@@ -13,14 +13,14 @@
   </thead>
 
   <tbody>
-    <% @platforms.each do |platform| %>
-      <% if Platform.where(:name => platform[:name]).size > 0 %>
-      <% @rows = Platform.where(:name => platform[:name]) %>
+    <% platform_options().each do |platform_name| %>
+      <% if Platform.where(:name => platform_name).size > 0 %>
+      <% @rows = Platform.where(:name => platform_name) %>
         <tr>
-          <td><%= platform[:name] %></td>
+          <td><%= platform_name %></td>
           <td><%= @rows.size %></td>
           <td><%= @rows.where(:borrowed => true).size %>
-          <td><%= link_to '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'.html_safe, platforms_path() + "?pname=" + platform[:name]  %></td>
+          <td><%= link_to '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'.html_safe, platforms_path() + "?pname=" + platform_name  %></td>
         </tr>
       <% end %>
     <% end %>

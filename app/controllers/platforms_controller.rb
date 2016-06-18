@@ -10,7 +10,6 @@ class PlatformsController < ApplicationController
       @platforms = Platform.where(:name => @pname)
       render 'index_specific'
     else
-    @platforms = platform_index
       render 'index'
     end
   end
@@ -74,13 +73,6 @@ class PlatformsController < ApplicationController
     def set_platform
       @platform = Platform.find(params[:id])
     end
-
-    def platform_index
-    #  platforms = Array.new(9,Hash.new)
-    return [{name: "Amazon" },{name: "Flickr"},{name: "Hulu"},{name: "Maxdome"},{name: "Netflix"},
-      {name: "Stream general"},{name: "Vimeo"},{name: "Watchever"},{name: "Youtube"}]
-    end
-
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def platform_params

@@ -2,8 +2,8 @@
 
 <% if !@platform.video.nil? %>
 <p>
-  <strong>VideoName:</strong>
-    <%= platform.video.name %>
+  <strong>Video Name:</strong>
+    <%= @platform.video.name %>
 </p>
 <% end %>
 
@@ -16,14 +16,6 @@
   <strong>Borroweddate:</strong>
   <%= @platform.borrowedDate %>
 </p>
-<% if !@platform.location.nil? %>
-  <p>
-    <strong> Video: </strong>
-    <%= @platform.location.video.name %><br>
-  </p>
-
-  <%= link_to 'Edit', edit_platform_path(@platform) %>
-<%end%>
 
 <%= link_to 'Edit', edit_platform_path(@platform) %>
 <%= link_to 'Back', platforms_path() + "?pname=" + @platform.name %>

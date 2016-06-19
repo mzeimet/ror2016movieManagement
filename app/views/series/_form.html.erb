@@ -1,4 +1,4 @@
-<%= form_for(@series) do |f| %>
+<%= bootstrap_form_for(@series) do |f| %>
   <% if @series.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@series.errors.count, "error") %> prohibited this series from being saved:</h2>
@@ -12,14 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :cover %><br>
     <%= f.file_field :cover%> <br>
   </div>
   <div class="actions">
-    <%= f.submit %><br>
+    <%= f.submit %><br><br>
   </div>
 <% end %>

@@ -1,22 +1,19 @@
 <%= bootstrap_form_for(@episode) do |episode| %>
     <%= bootstrap_form_for(@video) do |video| %>
-    <% if @episode.errors.any? %>
+    <% if (@episode.errors.any? || @video.errors.any? || @video.location.errors.any?) %>
       <div id="error_explanation">
-        <h2><%= pluralize(@episode.errors.count, "error") %> prohibited this episode from being saved:</h2>
+        <h2><%= pluralize(@episode.errors.count + @video.errors.count + @video.location.errors.count, "error") %>
+           prohibited this episode from being saved:</h2>
         <ul>
             <% @episode.errors.full_messages.each do |message| %>
               <li><%= message %></li>
             <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <% if @video.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@video.errors.count, "error") %> prohibited this episode from being saved:</h2>
-        <ul>
-          <% @video.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
+            <% @video.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            <% @video.location.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
         </ul>
       </div>
     <% end %>
@@ -26,7 +23,7 @@
     <%= episode.hidden_field :season, :value => @episode.season.id%>
   </div>
   <div class="field">
-    <%= episode.number_field :episodeNumber %>
+    <%= episode.number_field :episodeNumber, label: "Episode number", in: 1...100 %>
   </div>
   <div class="field">
     <%= video.text_field :name %>
@@ -38,10 +35,10 @@
     <%= video.date_select :release %>
   </div>
   <div class="field">
-    <%= video.number_field :length %>
+    <%= video.number_field :length, placeholder: "Length in minutes", in: 1...500 %>
   </div>
   <div class="field">
-    <%= video.number_field :raiting %>
+    <%= video.number_field :raiting, in: 1...100, placeholder: "between 1 and 100" %>
   </div>
   <div class="field">
     <%= video.text_area :summary %>
@@ -52,9 +49,9 @@
   <h3> Location </h3>
   <%= video.fields_for :location do |location| %>
       <%= location.text_area :description, label:"URL or own description" %>
-      <%= location.fields_for :platforms do |platform| %>
       <button type="button" class="btn" data-toggle="collapse" data-target="#platform"> Add Platform</button>
       <div id="platform" class="panel panel-default collapse">
+      <%= location.fields_for :platforms do |platform| %>
         <div class="panel-body">
           <h4> Platform </h4>
           <br>
@@ -65,7 +62,7 @@
           <%= platform.check_box :borrowed %>
           </div>
           <div class="field">
-          <%= platform.date_select :borrowedDate %>
+          <%= platform.date_select :borrowedDate,label:"borrowed until" %>
           </div>
         </div>
       </div>

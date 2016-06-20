@@ -7,9 +7,9 @@ Rails.application.configure do
    :port => 587,
    :domain => "gmail.com",
    :authentication => :login,
-   :user_name => "3dmodelorganizer@gmail.com",
-   :password => "Stuhlbein",
-    enable_starttls_auto: true } # adresse von steven geborgt, ja , nicht meine
+   :user_name => ENV['MAIL_ADRESS'],
+   :password => ENV['MAIL_PASSWORD'],
+    enable_starttls_auto: true }
   # Code is not reloaded between requests.
   config.cache_classes = true
 

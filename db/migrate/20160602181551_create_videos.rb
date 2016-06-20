@@ -1,7 +1,7 @@
 class CreateVideos < ActiveRecord::Migration
   def change
     create_table :videos do |t|
-      t.string :videoType
+      t.integer :videoType
       t.string :name
       t.boolean :seen
       t.integer :length

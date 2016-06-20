@@ -1,6 +1,15 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  config.action_mailer.default_url_options = {:host => 'videomanagement.herokuapp.com'}
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+   :address => "smtp.gmail.com",
+   :port => 587,
+   :domain => "gmail.com",
+   :authentication => :login,
+   :user_name => "3dmodelorganizer@gmail.com",
+   :password => "Stuhlbein",
+    enable_starttls_auto: true } # adresse von steven geborgt, ja , nicht meine
   # Code is not reloaded between requests.
   config.cache_classes = true
 

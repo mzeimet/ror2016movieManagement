@@ -1,20 +1,17 @@
 <%= bootstrap_form_for(@genre) do |f| %>
-  <% if @genre.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@genre.errors.count, "error") %> prohibited this genre from being saved:</h2>
-
-      <ul>
-      <% @genre.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.text_field :name %>
+<% if @genre.errors.any? %>
+<div id="error_explanation">
+  <div class="alert alert-danger" role="alert">
+    <p id="notice">  <h4><%= pluralize(@genre.errors.count, "error") %> prohibited this genre from being saved</h4>
+    </p>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div> <br><br>
+</div>
+<% end %>
+
+<div class="field">
+  <%= f.text_field :name %>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div> <br><br>
 <% end %>

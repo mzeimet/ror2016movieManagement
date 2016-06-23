@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<% if !flash[:notice].nil? %>
+<div class="alert alert-success" role="alert"><p id="notice"><%= notice %></p></div>
+<% end %>
 
 <h1>Genre <%= @genre.name %> </h1>
 

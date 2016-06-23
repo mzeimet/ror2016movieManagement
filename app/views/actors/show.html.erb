@@ -1,3 +1,6 @@
+<% if !flash[:notice].nil? %>
+<div class="alert alert-success" role="alert"><p id="notice"><%= notice %></p></div>
+<% end %>
 <h1><%= @actor.name %></h1>
 
 <% if !@actor.cover.nil? && @actor.cover.to_s.length > 0 %>

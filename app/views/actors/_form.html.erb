@@ -1,14 +1,10 @@
 <%= bootstrap_form_for(@actor) do |f| %>
-  <% if @actor.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@actor.errors.count, "error") %> prohibited this actor from being saved:</h2>
-
-      <ul>
-      <% @actor.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+<% if @actor.errors.any? %>
+<div id="error_explanation">
+  <div class="alert alert-danger" role="alert">
+    <p id="notice">  <h4><%= pluralize(@actor.errors.count, "error") %> prohibited this actor from being saved</h4>
+    </p>
+  </div>
   <% end %>
 
   <div class="field">
@@ -20,4 +16,4 @@
   <div class="actions">
     <%= f.submit %>
   </div><br><br>
-<% end %>
+  <% end %>

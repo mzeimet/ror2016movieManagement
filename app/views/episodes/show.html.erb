@@ -1,69 +1,71 @@
-<p id="notice"><%= notice %></p>
 <div class="container">
-<p>
-  <strong>Series:</strong>
-  <%= @episode.season.series.name %>
-</p>
-<p>
-  <strong>Season Number:</strong>
-  <%= @episode.season.number %>
-</p>
-<p>
-  <strong>Episodenumber:</strong>
-  <%= @episode.episodeNumber %>
-</p>
-<p>
-  <strong>Name:</strong>
-  <%= @video.name %>
-</p>
-
-<p>
-  <strong>Seen:</strong>
-    <%=  icon_right_wrong(@video.seen) %>
-</p>
-
-<p>
-  <strong>Length:</strong>
-  <%= @video.length %>
-</p>
-
-<p>
-  <strong>Release Date:</strong>
-  <%= convert_date(@video.release) %>
-</p>
-
-<p>
-  <strong>Raiting:</strong>
-  <%= @video.raiting %>
-</p>
-
-<p>
-  <strong>Summary:</strong>
-  <%= @video.summary %>
-</p>
-<p>
-  <strong>Note:</strong>
-  <%= @video.note %>
-</p>
-<p>
-  <strong> Actors:</strong>
-  <% @video.actors.each do |f| %>
-    <%= f.name %>
+  <% if !flash[:notice].nil? %>
+  <div class="alert alert-success" role="alert"><p id="notice"><%= notice %></p></div>
   <% end %>
-</p>
-<p>
-  <strong> Location:</strong>
-  <%= @video.location.description %>
-</p>
-<p>
-  <strong> Platform: </strong>
-  <% @video.location.platforms.each do |p| %>
+  <p>
+    <strong>Series:</strong>
+    <%= @episode.season.series.name %>
+  </p>
+  <p>
+    <strong>Season Number:</strong>
+    <%= @episode.season.number %>
+  </p>
+  <p>
+    <strong>Episodenumber:</strong>
+    <%= @episode.episodeNumber %>
+  </p>
+  <p>
+    <strong>Name:</strong>
+    <%= @video.name %>
+  </p>
+
+  <p>
+    <strong>Seen:</strong>
+    <%=  icon_right_wrong(@video.seen) %>
+  </p>
+
+  <p>
+    <strong>Length:</strong>
+    <%= @video.length %>
+  </p>
+
+  <p>
+    <strong>Release Date:</strong>
+    <%= convert_date(@video.release) %>
+  </p>
+
+  <p>
+    <strong>Raiting:</strong>
+    <%= @video.raiting %>
+  </p>
+
+  <p>
+    <strong>Summary:</strong>
+    <%= @video.summary %>
+  </p>
+  <p>
+    <strong>Note:</strong>
+    <%= @video.note %>
+  </p>
+  <p>
+    <strong> Actors:</strong>
+    <% @video.actors.each do |f| %>
+    <%= f.name %>
+    <% end %>
+  </p>
+  <p>
+    <strong> Location:</strong>
+    <%= @video.location.description %>
+  </p>
+  <p>
+    <strong> Platform: </strong>
+    <% @video.location.platforms.each do |p| %>
     <%= p.name %>
     <% if p.borrowed %>
-      , borrowed until <%= convert_date(p.borrowedDate) %>
+    , borrowed until <%= convert_date(p.borrowedDate) %>
     <% end %> <br>
-  <% end %>
-</p>
-<%= link_to 'Edit', edit_episode_path(@episode) %> |
-<%= link_to 'Back', season_path(@episode.season.id) %>
+    <% end %>
+  </p>
+  <%= link_to 'Edit', edit_episode_path(@episode) %> |
+  <%= link_to 'Back', season_path(@episode.season.id) %>
 </div>

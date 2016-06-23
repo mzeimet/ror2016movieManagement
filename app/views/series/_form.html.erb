@@ -1,23 +1,20 @@
 <%= bootstrap_form_for(@series) do |f| %>
-  <% if @series.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@series.errors.count, "error") %> prohibited this series from being saved:</h2>
+<% if @series.errors.any? %>
+<div id="error_explanation">
+  <div class="alert alert-danger" role="alert">
+    <p id="notice">  <h4><%= pluralize(@series.errors.count, "error") %> prohibited this series from being saved</h4>
+    </p>
+  </div>
+</div>
+<% end %>
 
-      <ul>
-      <% @series.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.file_field :cover%> <br>
-  </div>
-  <div class="actions">
-    <%= f.submit %><br><br>
-  </div>
+<div class="field">
+  <%= f.text_field :name %>
+</div>
+<div class="field">
+  <%= f.file_field :cover%> <br>
+</div>
+<div class="actions">
+  <%= f.submit %><br><br>
+</div>
 <% end %>

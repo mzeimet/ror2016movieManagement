@@ -14,7 +14,6 @@ class VideosController < ApplicationController
 
   # GET /videos/new
   def new
-    @selected = ""
     @video = Video.new
     @video.build_location
     @video.location.platforms.build
@@ -27,19 +26,11 @@ class VideosController < ApplicationController
   # POST /videos
   # POST /videos.json
   def create
-    @video = Video.new(video_params.except(:actors).except(:genres).except(:regisseurs))
-    @actors = Actor.where(:id => video_params[:actors])
-    @genres = Genre.where(:id => video_params[:genres])
-    @regisseurs = Regisseur.where(:id => video_params[:regisseurs])
-    @video.actors << @actors
-    @video.genres << @genres
-    @video.regisseurs << @regisseurs
-    if (video_params[:videoType] = 2 )
-      @episode = Episode.new()
-      @episode.video = @video
-      @episode.save
-    end
-        respond_to do |format|
+    @video = create_video_specific(params[:add_platform], video_params)
+    @video.actors << Actor.where(:id => video_params[:actors])
+    @video.genres << Genre.where(:id => video_params[:genres])
+    @video.regisseurs << Regisseur.where(:id => video_params[:regisseurs])
+    respond_to do |format|
       if @video.save
         format.html { redirect_to @video}
         format.json { render :show, status: :created, location: @video }
@@ -84,13 +75,24 @@ class VideosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_video
-      @video = Video.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_video
+    @video = Video.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def video_params
-      params.require(:video).permit(:videoType, :name, :seen, :length, :cover, :release, :raiting, :summary, :ageRating, :note, :actors =>[], :genres =>[], :regisseurs =>[], location_attributes: [:description, :id, platforms_attributes: [:name, :borrowed, :borrowedDate, :id]])
+  def create_video_specific(has_plattform, video_parameters)
+    if(has_plattform.nil? || has_plattform != "1")
+      @hash = video_parameters
+      @hash[:location_attributes].delete(:platforms_attributes)
+      @video = Video.new(@hash.except(:actors).except(:genres).except(:regisseurs))
+    else
+      @video = Video.new(video_params.except(:actors).except(:genres).except(:regisseurs))
     end
+    return @video
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def video_params
+    params.require(:video).permit(:videoType, :name, :seen, :length, :cover, :release, :raiting, :summary, :ageRating, :note, :actors =>[], :genres =>[], :regisseurs =>[], location_attributes: [:description, :id, platforms_attributes: [:name, :borrowed, :borrowedDate, :id]])
+  end
 end

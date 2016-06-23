@@ -14,7 +14,7 @@ class Video < ActiveRecord::Base
   mount_uploader :cover, PictureUploader
 
   validates :name, presence: true, length: {minimum: 3}
-  validates :raiting, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 100}
+  validates :raiting, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 100}, allow_nil:true
   validates :ageRating, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 22}, allow_nil:true
   validate :relase_cannot_be_in_the_future
 

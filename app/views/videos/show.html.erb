@@ -81,6 +81,7 @@
   <%= @video.location.description %> <br>
 </p>
 
+<% if !@video.location.platforms.nil? %>
 <p>
   <strong> Platform: </strong>
   <% @video.location.platforms.each do |p| %>
@@ -90,6 +91,7 @@
     <% end %> <br>
   <% end %>
 </p>
+<% end %>
 
 <%= link_to 'Edit', edit_video_path(@video) %> |
 <%= link_to 'Back', videos_path %>

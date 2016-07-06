@@ -29,6 +29,7 @@ class ActorsController < ApplicationController
 
     respond_to do |format|
       if @actor.save
+        UserMailer.actor_added(@actor).deliver_later
         format.html { redirect_to @actor, notice: 'Actor was successfully created.' }
         format.json { render :show, status: :created, location: @actor }
       else

@@ -2,6 +2,10 @@
 
 one:
   episodeNumber: 1
+  season: one
+  video: one
 
 two:
-  episodeNumber: 1
+  episodeNumber: 2
+  season: one
+  video: two

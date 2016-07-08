@@ -15,13 +15,15 @@ class SeasonsControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new ,series: @season.series.id
     assert_response :success
   end
 
   test "should create season" do
     assert_difference('Season.count') do
-      post :create, season: { cover: @season.cover, number: @season.number }
+      post :create, season: { cover: @season.cover, number: @season.number+Season.where(:series =>@season.series).count, series:@season.series }
+      # + season count weil die number in dem scope unique sein muss
+      # puts assigns(:season).errors.inspect
     end
 
     assert_redirected_to season_path(assigns(:season))

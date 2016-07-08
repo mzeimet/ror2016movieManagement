@@ -15,13 +15,13 @@ class EpisodesControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    get :new
+    get :new, season:@episode.season.id
     assert_response :success
   end
 
   test "should create episode" do
     assert_difference('Episode.count') do
-      post :create, episode: { episodeNumber: @episode.episodeNumber }
+      post :create, episode: { episodeNumber: @episode.episodeNumber,season: @episode.season,video: videos(:one) }
     end
 
     assert_redirected_to episode_path(assigns(:episode))

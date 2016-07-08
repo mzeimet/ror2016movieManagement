@@ -2,6 +2,8 @@
 
 one:
   description: MyText
+  video: one
 
 two:
   description: MyText
+  video: two

@@ -3,7 +3,9 @@
 one:
   number: 1
   cover: MyString
+  series: one
 
 two:
-  number: 1
+  number: 2
   cover: MyString
+  series: two

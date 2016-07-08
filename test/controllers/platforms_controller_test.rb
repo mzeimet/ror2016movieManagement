@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class PlatformsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+  include Warden::Test::Helpers
   setup do
     @platform = platforms(:one)
+    @user = users(:one)
+    sign_in @user
   end
 
   test "should get index" do

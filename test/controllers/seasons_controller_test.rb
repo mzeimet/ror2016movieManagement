@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class SeasonsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+  include Warden::Test::Helpers  
   setup do
     @season = seasons(:one)
   end

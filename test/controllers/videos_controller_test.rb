@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class VideosControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+  include Warden::Test::Helpers  
   setup do
     @video = videos(:one)
   end

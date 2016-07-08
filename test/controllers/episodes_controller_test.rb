@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class EpisodesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+  include Warden::Test::Helpers  
   setup do
     @episode = episodes(:one)
   end

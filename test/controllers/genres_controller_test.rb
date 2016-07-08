@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class GenresControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+  include Warden::Test::Helpers  
   setup do
     @genre = genres(:one)
   end

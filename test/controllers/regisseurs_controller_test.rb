@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class RegisseursControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+  include Warden::Test::Helpers  
   setup do
     @regisseur = regisseurs(:one)
   end

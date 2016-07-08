@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class ActorsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+  include Warden::Test::Helpers  
   setup do
     @actor = actors(:one)
   end

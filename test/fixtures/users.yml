@@ -9,3 +9,9 @@ one:
 #
 two:
   email: test2@test.com
+
+user1:
+  id: 1
+  email: user1@test.eu
+  encrypted_password: abcdef1
+  confirmed_at: <%= Time.now %>

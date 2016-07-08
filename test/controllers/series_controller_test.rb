@@ -5,6 +5,7 @@ class SeriesControllerTest < ActionController::TestCase
   include Warden::Test::Helpers
   setup do
     @series = series(:one)
+    sign_in users(:user1)
   end
 
   test "should get index" do

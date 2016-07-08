@@ -2,9 +2,10 @@ require 'test_helper'
 
 class EpisodesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
-  include Warden::Test::Helpers  
+  include Warden::Test::Helpers
   setup do
     @episode = episodes(:one)
+    sign_in users(:user1)
   end
 
   test "should get index" do

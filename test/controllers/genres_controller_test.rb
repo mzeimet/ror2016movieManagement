@@ -2,9 +2,10 @@ require 'test_helper'
 
 class GenresControllerTest < ActionController::TestCase
   include Devise::TestHelpers
-  include Warden::Test::Helpers  
+  include Warden::Test::Helpers
   setup do
     @genre = genres(:one)
+    sign_in users(:user1)
   end
 
   test "should get index" do

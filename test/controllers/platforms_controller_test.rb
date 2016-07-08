@@ -5,8 +5,7 @@ class PlatformsControllerTest < ActionController::TestCase
   include Warden::Test::Helpers
   setup do
     @platform = platforms(:one)
-    @user = users(:one)
-    sign_in @user
+    sign_in users(:user1)
   end
 
   test "should get index" do

@@ -4,8 +4,8 @@ class PlatformsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
   include Warden::Test::Helpers
   setup do
-    @platform = platforms(:one)
     sign_in users(:user1)
+    @platform = platforms(:one)
   end
 
   test "should get index" do

@@ -25,6 +25,7 @@ class EpisodesController < ApplicationController
 
   # GET /episodes/1/edit
   def edit
+     @video= @episode.video
   end
 
   # POST /episodes
@@ -46,8 +47,11 @@ class EpisodesController < ApplicationController
     @episode.video = @video
 
     @video.save
+    @episode.valid?
+    @episode.errors.full_messages.inspect
     respond_to do |format|
       if @episode.save
+
         format.html { redirect_to @episode, notice: 'Episode was successfully created.' }
         format.json { render :show, status: :created, location: @episode }
       else

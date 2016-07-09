@@ -5,12 +5,14 @@ class PlatformsController < ApplicationController
   # GET /platforms
   # GET /platforms.json
   def index
-    if (params.has_key?(:pname))
+    @platforms = Platform.all
+    if (!params.has_key?(:pname))
+      render 'index'
+    else
       @pname = params[:pname]
       @platforms = Platform.where(:name => @pname)
       render 'index_specific'
-    else
-      render 'index'
+
     end
   end
 

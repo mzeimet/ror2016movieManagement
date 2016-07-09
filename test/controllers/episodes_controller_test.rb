@@ -22,13 +22,12 @@ class EpisodesControllerTest < ActionController::TestCase
 
   test "should create episode" do
     assert_difference('Episode.count') do
-      params = {episode: { episodeNumber: @episode.episodeNumber,season: @episode.season },
+      params = {episode: { episodeNumber: @episode.episodeNumber+2,season: @episode.season },
       video: {videoType: "2", name: @video.name, location_attributes: {description: locations(:one).description }
     }}
       post :create, params
-      Rails::logger.debug params.to_S
     end
-
+    #  puts(assigns(:episode).errors.messages)
     assert_redirected_to episode_path(assigns(:episode))
 
   end

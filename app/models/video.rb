@@ -22,8 +22,10 @@ class Video < ActiveRecord::Base
   validates_associated :platforms
 
   def relase_cannot_be_in_the_future
-    if release > Date.today
-      errors.add(:release, "can't be in the future")
+    if !release.nil?
+      if release > Date.today
+        errors.add(:release, "can't be in the future")
+      end
     end
   end
 end

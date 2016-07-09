@@ -11,7 +11,8 @@ one:
   summary: MyText
   ageRating: 1
   note: MyText
-
+  location_id: locactions(:one).id
+# warum auch immer er das hier nicht hinbekommt ohne die id spezifikation
 two:
   videoType: MyString
   name: MyString
@@ -23,3 +24,4 @@ two:
   summary: MyText
   ageRating: 1
   note: MyText
+  location_id: locations(:two).id

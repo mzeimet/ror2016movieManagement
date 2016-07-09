@@ -21,7 +21,14 @@ class VideosControllerTest < ActionController::TestCase
 
   test "should create video" do
     assert_difference('Video.count') do
-      post :create , video: { ageRating: @video.ageRating, cover: @video.cover, length: @video.length, name: @video.name, note: @video.note, raiting: @video.raiting, release: @video.release, seen: @video.seen, summary: @video.summary, videoType: @video.videoType , location_attributes: [locations(:one).description, locations(:one).id, platforms_attributes: [platforms(:one).name,  platforms(:one).borrowed,  platforms(:one).borrowedDate, platforms(:one).id]]}
+      post :create , video: { ageRating: @video.ageRating, cover: @video.cover, length: @video.length, name: @video.name, note: @video.note,
+                                raiting: @video.raiting, release: @video.release, seen: @video.seen, summary: @video.summary, videoType: @video.videoType,
+                                location_attributes: {description: locations(:one).description,
+                                                      platforms_attributes: {name: platforms(:one).name,  borrowed: platforms(:one).borrowed,
+                                                                            borrowedDate: platforms(:one).borrowedDate, id: platforms(:one).id}
+                                                      }
+                              }
+
     end
 
     assert_redirected_to video_path(assigns(:video))

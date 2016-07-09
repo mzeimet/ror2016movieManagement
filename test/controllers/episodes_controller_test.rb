@@ -5,6 +5,7 @@ class EpisodesControllerTest < ActionController::TestCase
   include Warden::Test::Helpers
   setup do
     @episode = episodes(:one)
+    @video = videos(:one)
     sign_in users(:user1)
   end
 
@@ -21,10 +22,15 @@ class EpisodesControllerTest < ActionController::TestCase
 
   test "should create episode" do
     assert_difference('Episode.count') do
-      post :create, episode: { episodeNumber: @episode.episodeNumber,season: @episode.season,video: videos(:one) }
+      params = {episode: { episodeNumber: @episode.episodeNumber,season: @episode.season },
+      video: {videoType: "2", name: @video.name, location_attributes: {description: locations(:one).description }
+    }}
+      post :create, params
+      Rails::logger.debug params.to_S
     end
 
     assert_redirected_to episode_path(assigns(:episode))
+
   end
 
   test "should show episode" do

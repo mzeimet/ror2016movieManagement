@@ -11,7 +11,7 @@ class EpisodesController < ApplicationController
   # GET /episodes/1
   # GET /episodes/1.json
   def show
-   @video = Video.find(@episode.video.id)
+   @video = @episode.video
   end
 
   # GET /episodes/new

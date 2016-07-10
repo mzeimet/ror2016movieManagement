@@ -11,7 +11,7 @@
   </thead>
 
   <tbody>
-    <% @actors.each do |actor| %>
+    <% Actor.all.each do |actor| %>
       <tr>
         <td><%= actor.name %></td>
         <td><%= link_to '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'.html_safe, actor %></td>

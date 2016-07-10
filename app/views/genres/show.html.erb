@@ -16,7 +16,7 @@
   <tbody>
     <% @genre.videos.each do |video| %>
       <tr>
-        <td><%= video.name %></td>
+        <td><%= link_to video.name, video_path(video.id) %></td>
         <td><% if video.seen %>
               <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
             <%else %>

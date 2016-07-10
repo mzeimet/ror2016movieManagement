@@ -5,7 +5,6 @@ class ActorsController < ApplicationController
   # GET /actors
   # GET /actors.json
   def index
-    @actors = Actor.all
   end
 
   # GET /actors/1

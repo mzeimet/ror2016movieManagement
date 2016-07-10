@@ -1,4 +1,4 @@
-<%= bootstrap_form_for(@video) do |f| %>
+<%= bootstrap_form_for(@video) do |video| %>
 <% if (@video.errors.any? || @video.location.errors.any?) %>
 <div id="error_explanation">
     <div class="alert alert-danger" role="alert">
@@ -10,100 +10,36 @@
 </div>
 <% end %>
 
-<%= f.hidden_field :videoType, :value => 1%>
+<%= video.hidden_field :videoType, :value => 1%>
 <div class="field">
-    <%= f.text_field :name %>
-</div>
-<div class="field">
-    <%= f.check_box :seen %>
+    <%= video.text_field :name %>
 </div>
 <div class="field">
-    <%= f.number_field :length, placeholder: "Length in minutes", in: 1...500 %>
+    <%= video.check_box :seen %>
 </div>
 <div class="field">
-    <%= f.file_field :cover %>
+    <%= video.number_field :length, placeholder: "Length in minutes", in: 1...500 %>
 </div>
 <div class="field">
-    <%= f.date_select :release %>
+    <%= video.file_field :cover %>
 </div>
 <div class="field">
-    <%= f.number_field :raiting, in: 1...100, placeholder: "between 1 and 100" %>
+    <%= video.date_select :release %>
 </div>
 <div class="field">
-    <%= f.text_area :summary %>
+    <%= video.number_field :raiting, in: 1...100, placeholder: "between 1 and 100" %>
 </div>
 <div class="field">
-    <%= f.number_field :ageRating %>
+    <%= video.text_area :summary %>
 </div>
 <div class="field">
-    <%= f.text_area :note %>
+    <%= video.number_field :ageRating %>
 </div>
-<div class="panel panel-default">
-    <div class="panel-body">
-        <h3>
-            Location
-        </h3>
-        <br>
-        <%= f.fields_for :location do |location| %>
-        <%= location.text_area :description, label:"URL or own description" %>
-        <div class="field">
-            <%= check_box_tag 'add_platform'%>
-            Add Platform
-        </div>
-        <button type="button" class="btn" data-toggle="collapse" data-target="#platform" value="1">Toggle Platform View</button>
-        <div id="platform" class="panel panel-default collapse">
-            <%= location.fields_for :platforms do |platform| %>
-            <div class="panel-body">
-                <h4>
-                    Platform
-                </h4>
-                <br>
-                <div class="field">
-                    <%= platform.select :name, options_for_select(platform_options(),@video.location.platforms.first.name)%>
-                </div>
-                <div class="field">
-                    <%= platform.check_box :borrowed %>
-                </div>
-                <div class="field">
-                    <%= platform.date_select :borrowedDate ,label:"borrowed until"%>
-                </div>
-            </div>
-        </div>
-        <% end %>
-        <% end %>
-    </div>
+<div class="field">
+    <%= video.text_area :note %>
 </div>
-<div class="btn-group" role="group" aria-label="">
-    <button type="button" class="btn" data-toggle="collapse" data-target="#regisseurs">
-        Add Regisseurs</button>
-    <button type="button" class="btn" data-toggle="collapse" data-target="#actors">
-        Add Actors</button>
-    <button type="button" class="btn" data-toggle="collapse" data-target="#genres">
-        Add Genres</button>
-</div><br>
-<div id="regisseurs" class="panel panel-default collapse">
-    <div class="panel-body">
-        <div class="field">
-            <%= f.select :regisseurs,  options_from_collection_for_select( Regisseur.all, 'id', 'name'),{}, {:multiple => true } %>
-        </div>
-    </div>
-</div>
-<div id="actors" class="panel panel-default collapse">
-    <div class="panel-body">
-        <div class="field">
-            <%= f.select :actors,  options_from_collection_for_select(Actor.all, 'id', 'name'),{}, {:multiple => true } %>
-        </div>
-    </div>
-</div>
-<div id="genres" class="panel panel-default collapse">
-    <div class="panel-body">
-        <div class="field">
-            <%= f.select :genres,  options_from_collection_for_select( Genre.all, 'id', 'name'),{}, {:multiple => true } %>
-        </div>
-    </div>
-</div>
-<br><br><br>
+<%= render 'layouts/videorelationfields', video: video, platforms: @video.location.platforms %>
 <div class="actions">
-    <%= f.submit %>
+    <%= video.submit %>
 </div><br><br>
 <% end %>

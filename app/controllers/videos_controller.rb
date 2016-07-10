@@ -26,7 +26,7 @@ class VideosController < ApplicationController
     # POST /videos
     # POST /videos.json
     def create
-        @video = create_pure_video(params[:add_platform], video_params)
+        @video = create_pure_video(params[:add_platform], video_params,platform_params)
         @video.actors << Actor.where(id: video_params[:actors])
         @video.genres << Genre.where(id: video_params[:genres])
         @video.regisseurs << Regisseur.where(id: video_params[:regisseurs])
@@ -54,6 +54,8 @@ class VideosController < ApplicationController
             @regisseurs = Regisseur.where(id: video_params[:regisseurs])
             @video.regisseurs.destroy_all
             @video.regisseurs << @regisseurs
+            @video.location.platforms.destroy_all
+            @video.location.platforms << Platform.new(platform_params)
             if @video.update(video_params.except(:actors).except(:genres).except(:regisseurs))
                 format.html { redirect_to @video }
                 format.json { render :show, status: :ok, location: @video }
@@ -82,13 +84,14 @@ class VideosController < ApplicationController
     end
 
     #create only video, without gerners actors etc
-    def create_pure_video(has_plattform, video_parameters)
+    def create_pure_video(has_plattform, video_parameters,platform_parameter)
         if has_plattform.nil? || has_plattform != '1'
             @hash = video_parameters
             @hash[:location_attributes].delete(:platforms_attributes)
             @video = Video.new(@hash.except(:actors).except(:genres).except(:regisseurs))
         else
             @video = Video.new(video_params.except(:actors).except(:genres).except(:regisseurs))
+            @video.location.platforms << Platform.new(platform_parameter)
         end
         @video
     end
@@ -96,5 +99,9 @@ class VideosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def video_params
         params.require(:video).permit(:videoType, :name, :seen, :length, :cover, :release, :raiting, :summary, :ageRating, :note, actors: [], genres: [], regisseurs: [], location_attributes: [:description, :id, platforms_attributes: [:name, :borrowed, :borrowedDate, :id]])
+    end
+
+    def platform_params
+        params.require(:platforms).permit(:name, :borrowed, :borrowedDate, :id)
     end
 end

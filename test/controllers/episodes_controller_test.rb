@@ -23,8 +23,9 @@ class EpisodesControllerTest < ActionController::TestCase
   test "should create episode" do
     assert_difference('Episode.count') do
       params = {episode: { episodeNumber: @episode.episodeNumber+2,season: @episode.season },
-      video: {videoType: "2", name: @video.name, location_attributes: {description: locations(:one).description }
-    }}
+      video: {videoType: "2", name: @video.name, location_attributes: {description: locations(:one).description }},
+      platforms: {name: platforms(:one).name,  borrowed: platforms(:one).borrowed,borrowedDate: platforms(:one).borrowedDate, id: platforms(:one).id}
+    }
       post :create, params
     end
     #  puts(assigns(:episode).errors.messages)
@@ -43,8 +44,12 @@ class EpisodesControllerTest < ActionController::TestCase
   end
 
   test "should update episode" do
-    patch :update, id: @episode, episode: { episodeNumber: @episode.episodeNumber }
-    assert_redirected_to episode_path(assigns(:episode))
+    params = { id: @episode,episode: { episodeNumber: @episode.episodeNumber+2,season: @episode.season },
+    video: {videoType: "2", name: @video.name, location_attributes: {description: locations(:one).description }},
+    platforms: {name: platforms(:one).name,  borrowed: platforms(:one).borrowed,borrowedDate: platforms(:one).borrowedDate, id: platforms(:one).id}
+  }
+    patch :update, params
+      assert_redirected_to episode_path(assigns(:episode))
   end
 
   test "should destroy episode" do

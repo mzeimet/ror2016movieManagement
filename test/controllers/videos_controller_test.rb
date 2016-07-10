@@ -23,11 +23,11 @@ class VideosControllerTest < ActionController::TestCase
     assert_difference('Video.count') do
       post :create , video: { ageRating: @video.ageRating, cover: @video.cover, length: @video.length, name: @video.name, note: @video.note,
                                 raiting: @video.raiting, release: @video.release, seen: @video.seen, summary: @video.summary, videoType: @video.videoType,
-                                location_attributes: {description: locations(:one).description,
-                                                      platforms_attributes: {name: platforms(:one).name,  borrowed: platforms(:one).borrowed,
-                                                                            borrowedDate: platforms(:one).borrowedDate, id: platforms(:one).id}
+                                location_attributes: {description: locations(:one).description
+
                                                       }
-                              }
+                              }, platforms:{name: platforms(:one).name,  borrowed: platforms(:one).borrowed,
+                                                    borrowedDate: platforms(:one).borrowedDate, id: platforms(:one).id}
 
     end
 
@@ -45,7 +45,12 @@ class VideosControllerTest < ActionController::TestCase
   end
 
   test "should update video" do
-    patch :update, id: @video, video: { ageRating: @video.ageRating, cover: @video.cover, length: @video.length, name: @video.name, note: @video.note, raiting: @video.raiting, release: @video.release, seen: @video.seen, summary: @video.summary, videoType: @video.videoType }
+    patch :update, id: @video, video: { ageRating: @video.ageRating, cover: @video.cover, length: @video.length, name: @video.name, note: @video.note,
+                              raiting: @video.raiting, release: @video.release, seen: @video.seen, summary: @video.summary, videoType: @video.videoType,
+                              location_attributes: {description: locations(:one).description
+                                                    }
+                            }, platforms:{name: platforms(:one).name,  borrowed: platforms(:one).borrowed,
+                                                  borrowedDate: platforms(:one).borrowedDate, id: platforms(:one).id}
     assert_redirected_to video_path(assigns(:video))
   end
 

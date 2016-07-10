@@ -5,7 +5,7 @@ class EpisodesController < ApplicationController
     # GET /episodes
     # GET /episodes.json
     def index
-      @episodes = Episode.all
+        @episodes = Episode.all
     end
 
     # GET /episodes/1
@@ -18,9 +18,9 @@ class EpisodesController < ApplicationController
     def new
         @episode = Episode.new
         @episode.season = Season.find(params[:season])
-        @video = Video.new
-        @video.build_location
-        @video.location.platforms.build
+        @episode.video = Video.new
+        @episode.video.build_location
+        @episode.video.location.platforms.build
     end
 
     # GET /episodes/1/edit
@@ -32,15 +32,11 @@ class EpisodesController < ApplicationController
     # POST /episodes.json
     def create
         @episode = Episode.new(episode_params.except(:season))
-        @episode.season = Season.find(episode_params[:season])
-        @episode.video = Video.new(video_params.except(:actors).except(:genres).except(:regisseurs))
-        @episode.video.actors << Actor.where(id: video_params[:actors])
-        @episode.video.genres << Genre.where(id: video_params[:genres])
-        @episode.video.regisseurs << Regisseur.where(id: video_params[:regisseurs])
+        construct_others(@episode, episode_params[:season], video_params.except(:actors).except(:genres).except(:regisseurs),
+                         video_params[:actors], video_params[:genres], video_params[:regisseurs],true,params[:add_platform],platform_params)
 
         respond_to do |format|
             if @episode.save
-
                 format.html { redirect_to @episode, notice: 'Episode was successfully created.' }
                 format.json { render :show, status: :created, location: @episode }
             else
@@ -55,6 +51,8 @@ class EpisodesController < ApplicationController
     def update
         respond_to do |format|
             if @episode.update(episode_params.except(:season))
+              construct_others(@episode, episode_params[:season], video_params.except(:actors).except(:genres).except(:regisseurs),
+                               video_params[:actors], video_params[:genres], video_params[:regisseurs],false,params[:add_platform],platform_params)
                 format.html { redirect_to @episode, notice: 'Episode was successfully updated.' }
                 format.json { render :show, status: :ok, location: @episode }
             else
@@ -91,6 +89,29 @@ class EpisodesController < ApplicationController
     end
 
     def video_params
-        params.require(:video).permit(:videoType, :name, :seen, :length, :release, :raiting, :summary, :note, actors: [], regisseurs: [], location_attributes: [:description, :id, platforms_attributes: [:name, :borrowed, :borrowedDate, :id]])
+        params.require(:video).permit(:videoType, :name, :seen, :length, :release, :raiting, :summary, :note, genres: [], actors: [], regisseurs: [], location_attributes: [:description, :id, platforms_attributes: [:name, :borrowed, :borrowedDate, :id]])
     end
+
+    def construct_others(episode, season, video, actors, genres, regisseurs,new,has_plattform,platform_parameter)
+        if new == true
+          episode.video = Video.new(video)
+        else
+          episode.video.update(video)
+        end
+        if !has_plattform.nil? && has_plattform == '1'
+          episode.video.location.platforms << Platform.new(platform_parameter)
+        end
+        episode.season = Season.find(season)
+        episode.video.actors.destroy_all
+        episode.video.actors << Actor.where(id: actors)
+        episode.video.genres.destroy_all
+        episode.video.genres << Genre.where(id: genres)
+        episode.video.regisseurs.destroy_all
+        episode.video.regisseurs << Regisseur.where(id: regisseurs)
+    end
+
+    def platform_params
+        params.require(:platforms).permit(:name, :borrowed, :borrowedDate, :id)
+    end
+
 end

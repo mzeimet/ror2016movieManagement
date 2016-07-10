@@ -1,5 +1,5 @@
 class Episode < ActiveRecord::Base
-    belongs_to :video, validate: true
+    belongs_to :video, dependent: :destroy, validate: true
     belongs_to :season
 
     accepts_nested_attributes_for :video

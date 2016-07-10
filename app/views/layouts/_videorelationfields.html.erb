@@ -1,0 +1,65 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h3>
+            Location
+        </h3>
+        <br>
+        <%= video.fields_for :location do |location| %>
+        <%= location.text_area :description, label:"URL or own description" %>
+        <div class="field">
+            <%= check_box_tag 'add_platform'%>
+            Add Platform
+        </div>
+        <button type="button" class="btn" data-toggle="collapse" data-target="#platform" value="1">Toggle Platform View</button>
+        <div id="platform" class="panel panel-default collapse">
+            <%= fields_for :platforms do |platform| %>
+            <div class="panel-body">
+                <h4>
+                    Platform
+                </h4>
+                <br>
+                <div class="field">
+                    <%= platform.select :name, options_for_select(platform_options())%>
+                </div>
+                <div class="field">
+                    <%= platform.check_box :borrowed %>
+                </div>
+                <div class="field">
+                    <%= platform.date_select :borrowedDate ,label:"borrowed until"%>
+                </div>
+            </div>
+        </div>
+        <% end %>
+        <% end %>
+    </div>
+</div>
+<div class="btn-group" role="group" aria-label="">
+    <button type="button" class="btn" data-toggle="collapse" data-target="#regisseurs">
+        Add Regisseurs</button>
+    <button type="button" class="btn" data-toggle="collapse" data-target="#actors">
+        Add Actors</button>
+    <button type="button" class="btn" data-toggle="collapse" data-target="#genres">
+        Add Genres</button>
+</div><br>
+<div id="regisseurs" class="panel panel-default collapse">
+    <div class="panel-body">
+        <div class="field">
+            <%= video.select :regisseurs,  options_from_collection_for_select( Regisseur.all, 'id', 'name'),{}, {:multiple => true } %>
+        </div>
+    </div>
+</div>
+<div id="actors" class="panel panel-default collapse">
+    <div class="panel-body">
+        <div class="field">
+            <%= video.select :actors,  options_from_collection_for_select(Actor.all, 'id', 'name'),{}, {:multiple => true } %>
+        </div>
+    </div>
+</div>
+<div id="genres" class="panel panel-default collapse">
+    <div class="panel-body">
+        <div class="field">
+            <%= video.select :genres,  options_from_collection_for_select( Genre.all, 'id', 'name'),{}, {:multiple => true } %>
+        </div>
+    </div>
+</div>
+<br><br><br>

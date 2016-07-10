@@ -1,99 +1,101 @@
-<% if !flash[:notice].nil? %>
-<div class="alert alert-success" role="alert"><p id="notice"><%= notice %></p></div>
-<% end %>
-
+<%= render "layouts/successdiv" %>
 
 <% if !@video.cover.nil? && @video.cover.to_s.length > 0 %>
-  <%= image_tag @video.cover, height: "400" %>
+<%= image_tag @video.cover, height: "400" %>
 <%end%>
 
 <p>
-  <strong>Name:</strong>
-  <%= @video.name %>
+    <strong>Name:</strong>
+    <%= @video.name %>
 </p>
 
 <p>
-  <strong>Seen:</strong>
-  <% if @video.seen %>
-      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-  <%else %>
-      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-  <% end %>
+    <strong>Seen:</strong>
+    <%= icon_right_wrong(@video.seen) %>
 </p>
 
 <p>
-  <strong>Length:</strong>
-  <%= @video.length %>
+    <strong>Length:</strong>
+    <%= @video.length %>
 </p>
 
 <p>
-  <strong>Release:</strong>
-  <%= convert_date(@video.release) %>
+    <strong>Release:</strong>
+    <%= convert_date(@video.release) %>
 </p>
 
 <p>
-  <strong> Genres:</strong>
-  <% @video.genres.each do |f| %>
+    <strong>
+        Genres:</strong>
+    <% @video.genres.each do |f| %>
     <%= f.name %>
-  <% end %>
-</p>
-
-<p>
-  <strong> Actors:</strong>
-  <% @video.actors.each do |f| %>
-    <%= f.name %>
-  <% end %>
-</p>
-
-<p>
-  <strong>
-    <% if @video.regisseurs.size > 1 %>
-      Regisseurs:
-    <% else %>
-      Regisseur:
     <% end %>
-  </strong>
-  <% @video.regisseurs.each do |f| %>
+</p>
+
+<p>
+    <strong>
+        Actors:</strong>
+    <% @video.actors.each do |f| %>
     <%= f.name %>
-  <% end %>
+    <% end %>
 </p>
 
 <p>
-  <strong>Raiting:</strong>
-  <%= @video.raiting %>
+    <strong>
+        <% if @video.regisseurs.size > 1 %>
+        Regisseurs:
+    <% else %>
+        Regisseur:
+        <% end %>
+    </strong>
+    <% @video.regisseurs.each do |f| %>
+    <%= f.name %>
+    <% end %>
 </p>
 
 <p>
-  <strong>Agerating:</strong>
-  <%= @video.ageRating %>
+    <strong>Raiting:</strong>
+    <%= @video.raiting %>
 </p>
 
 <p>
-  <strong>Summary:</strong>
-  <%= @video.summary %>
+    <strong>Agerating:</strong>
+    <%= @video.ageRating %>
 </p>
 
 <p>
-  <strong>Note:</strong>
-  <%= @video.note %>
+    <strong>Summary:</strong>
+    <%= @video.summary %>
 </p>
 
 <p>
-  <strong> Location:</strong>
-  <%= @video.location.description %> <br>
+    <strong>Note:</strong>
+    <%= @video.note %>
+</p>
+
+<p>
+    <strong>
+        Location:</strong>
+    <%= @video.location.description %>
+    <br>
 </p>
 
 <% if !@video.location.platforms.nil? %>
 <p>
-  <strong> Platform: </strong>
-  <% @video.location.platforms.each do |p| %>
+    <strong>
+        Platform:
+    </strong>
+    <% @video.location.platforms.each do |p| %>
     <%= p.name %>
     <% if p.borrowed %>
-      , borrowed until <%= convert_date(p.borrowedDate) %>
-    <% end %> <br>
-  <% end %>
+    , borrowed until
+    <%= convert_date(p.borrowedDate) %>
+    <% end %>
+    <br>
+    <% end %>
 </p>
 <% end %>
 
-<%= link_to 'Edit', edit_video_path(@video) %> |
+<%= link_to 'Edit', edit_video_path(@video) %>
+|
 <%= link_to 'Back', videos_path %>

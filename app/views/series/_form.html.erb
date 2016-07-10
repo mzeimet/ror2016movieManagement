@@ -1,20 +1,14 @@
 <%= bootstrap_form_for(@series) do |f| %>
-<% if @series.errors.any? %>
-<div id="error_explanation">
-  <div class="alert alert-danger" role="alert">
-    <p id="notice">  <h4><%= pluralize(@series.errors.count, "error") %> prohibited this series from being saved</h4>
-    </p>
-  </div>
-</div>
-<% end %>
+<%= render 'layouts/errordiv', entity: @series, name:"series" %>
 
 <div class="field">
-  <%= f.text_field :name %>
+    <%= f.text_field :name %>
 </div>
 <div class="field">
-  <%= f.file_field :cover%> <br>
+    <%= f.file_field :cover%>
+    <br>
 </div>
 <div class="actions">
-  <%= f.submit %><br><br>
+    <%= f.submit %><br><br>
 </div>
 <% end %>

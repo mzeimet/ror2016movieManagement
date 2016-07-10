@@ -1,20 +1,20 @@
-<p id="notice"><%= notice %></p>
+<%= render "layouts/successdiv" %>
 
 <% if !@platform.video.nil? %>
 <p>
-  <strong>Video Name:</strong>
+    <strong>Video Name:</strong>
     <%= @platform.video.name %>
 </p>
 <% end %>
 
 <p>
-  <strong>Borrowed:</strong>
-  <%= @platform.borrowed %>
+    <strong>Borrowed:</strong>
+    <%= @platform.borrowed %>
 </p>
 
 <p>
-  <strong>Borroweddate:</strong>
-  <%= @platform.borrowedDate %>
+    <strong>Borroweddate:</strong>
+    <%= @platform.borrowedDate %>
 </p>
 
 <%= link_to 'Edit', edit_platform_path(@platform) %>

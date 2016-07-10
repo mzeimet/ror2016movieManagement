@@ -1,21 +1,15 @@
 <%= bootstrap_form_for(@season) do |f| %>
-<% if @season.errors.any? %>
-<div id="error_explanation">
-  <div class="alert alert-danger" role="alert">
-    <p id="notice">  <h4><%= pluralize(@season.errors.count, "error") %> prohibited this season from being saved</h4>
-    </p>
-  </div>
-</div>
-<% end %>
+<%= render 'layouts/errordiv', entity: @season, name:"season" %>
 
 <div class="field">
-  <h4>Series: <%=@season.series.name%></h4>
-  <%= f.hidden_field :series, :value => @season.series.id%>
+    <h4>Series:
+        <%=@season.series.name%></h4>
+    <%= f.hidden_field :series, :value => @season.series.id%>
 </div>
 <div class="field">
-  <%= f.number_field :number ,label: "Season number", in: 1...100%>
+    <%= f.number_field :number ,label: "Season number", in: 1...100%>
 </div>
 <div class="actions">
-  <%= f.submit %>
+    <%= f.submit %>
 </div><br><br>
 <% end %>

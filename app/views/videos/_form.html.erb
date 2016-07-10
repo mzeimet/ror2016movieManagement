@@ -1,99 +1,109 @@
 <%= bootstrap_form_for(@video) do |f| %>
 <% if (@video.errors.any? || @video.location.errors.any?) %>
 <div id="error_explanation">
-  <div class="alert alert-danger" role="alert">
-    <p id="notice">  <h4><%= pluralize(@video.errors.count, "error") %>  prohibited this movie from being saved</h4>
-    </p>
-  </div>
+    <div class="alert alert-danger" role="alert">
+        <p id="notice">
+            <h4><%= pluralize(@video.errors.count, "error") %>
+                prohibited this movie from being saved</h4>
+        </p>
+    </div>
 </div>
 <% end %>
 
 <%= f.hidden_field :videoType, :value => 1%>
 <div class="field">
-  <%= f.text_field :name %>
+    <%= f.text_field :name %>
 </div>
 <div class="field">
-  <%= f.check_box :seen %>
+    <%= f.check_box :seen %>
 </div>
 <div class="field">
-  <%= f.number_field :length, placeholder: "Length in minutes", in: 1...500 %>
+    <%= f.number_field :length, placeholder: "Length in minutes", in: 1...500 %>
 </div>
 <div class="field">
-  <%= f.file_field :cover %>
+    <%= f.file_field :cover %>
 </div>
 <div class="field">
-  <%= f.date_select :release %>
+    <%= f.date_select :release %>
 </div>
 <div class="field">
-  <%= f.number_field :raiting, in: 1...100, placeholder: "between 1 and 100" %>
+    <%= f.number_field :raiting, in: 1...100, placeholder: "between 1 and 100" %>
 </div>
 <div class="field">
-  <%= f.text_area :summary %>
+    <%= f.text_area :summary %>
 </div>
 <div class="field">
-  <%= f.number_field :ageRating %>
+    <%= f.number_field :ageRating %>
 </div>
 <div class="field">
-  <%= f.text_area :note %>
+    <%= f.text_area :note %>
 </div>
 <div class="panel panel-default">
-  <div class="panel-body">
-    <h3> Location </h3>
-    <br>
-    <%= f.fields_for :location do |location| %>
-    <%= location.text_area :description, label:"URL or own description" %>
-    <div class="field">
-      <%= check_box_tag 'add_platform'%> Add Platform
-    </div>
-    <button type="button" class="btn" data-toggle="collapse" data-target="#platform" value="1">Toggle Platform View</button>
-    <div id="platform" class="panel panel-default collapse">
-      <%= location.fields_for :platforms do |platform| %>
-      <div class="panel-body">
-        <h4> Platform </h4>
+    <div class="panel-body">
+        <h3>
+            Location
+        </h3>
         <br>
+        <%= f.fields_for :location do |location| %>
+        <%= location.text_area :description, label:"URL or own description" %>
         <div class="field">
-          <%= platform.select :name, options_for_select(platform_options(),@video.location.platforms.first.name)%>
+            <%= check_box_tag 'add_platform'%>
+            Add Platform
         </div>
-        <div class="field">
-          <%= platform.check_box :borrowed %>
+        <button type="button" class="btn" data-toggle="collapse" data-target="#platform" value="1">Toggle Platform View</button>
+        <div id="platform" class="panel panel-default collapse">
+            <%= location.fields_for :platforms do |platform| %>
+            <div class="panel-body">
+                <h4>
+                    Platform
+                </h4>
+                <br>
+                <div class="field">
+                    <%= platform.select :name, options_for_select(platform_options(),@video.location.platforms.first.name)%>
+                </div>
+                <div class="field">
+                    <%= platform.check_box :borrowed %>
+                </div>
+                <div class="field">
+                    <%= platform.date_select :borrowedDate ,label:"borrowed until"%>
+                </div>
+            </div>
         </div>
-        <div class="field">
-          <%= platform.date_select :borrowedDate ,label:"borrowed until"%>
-        </div>
-      </div>
+        <% end %>
+        <% end %>
     </div>
-    <% end %>
-    <% end %>
-  </div>
 </div>
 <div class="btn-group" role="group" aria-label="">
-  <button type="button" class="btn" data-toggle="collapse" data-target="#regisseurs"> Add Regisseurs</button>
-  <button type="button" class="btn" data-toggle="collapse" data-target="#actors"> Add Actors</button>
-  <button type="button" class="btn" data-toggle="collapse" data-target="#genres"> Add Genres</button>
+    <button type="button" class="btn" data-toggle="collapse" data-target="#regisseurs">
+        Add Regisseurs</button>
+    <button type="button" class="btn" data-toggle="collapse" data-target="#actors">
+        Add Actors</button>
+    <button type="button" class="btn" data-toggle="collapse" data-target="#genres">
+        Add Genres</button>
 </div><br>
 <div id="regisseurs" class="panel panel-default collapse">
-  <div class="panel-body">
-    <div class="field">
-      <%= f.select :regisseurs,  options_from_collection_for_select( Regisseur.all, 'id', 'name'),{}, {:multiple => true } %>
+    <div class="panel-body">
+        <div class="field">
+            <%= f.select :regisseurs,  options_from_collection_for_select( Regisseur.all, 'id', 'name'),{}, {:multiple => true } %>
+        </div>
     </div>
-  </div>
 </div>
 <div id="actors" class="panel panel-default collapse">
-  <div class="panel-body">
-    <div class="field">
-      <%= f.select :actors,  options_from_collection_for_select(Actor.all, 'id', 'name'),{}, {:multiple => true } %>
+    <div class="panel-body">
+        <div class="field">
+            <%= f.select :actors,  options_from_collection_for_select(Actor.all, 'id', 'name'),{}, {:multiple => true } %>
+        </div>
     </div>
-  </div>
 </div>
 <div id="genres" class="panel panel-default collapse">
-  <div class="panel-body">
-    <div class="field">
-      <%= f.select :genres,  options_from_collection_for_select( Genre.all, 'id', 'name'),{}, {:multiple => true } %>
+    <div class="panel-body">
+        <div class="field">
+            <%= f.select :genres,  options_from_collection_for_select( Genre.all, 'id', 'name'),{}, {:multiple => true } %>
+        </div>
     </div>
-  </div>
 </div>
 <br><br><br>
 <div class="actions">
-  <%= f.submit %>
+    <%= f.submit %>
 </div><br><br>
 <% end %>

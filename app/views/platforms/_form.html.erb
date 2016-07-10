@@ -1,31 +1,21 @@
 <%= form_for(@platform) do |f| %>
-  <% if @platform.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@platform.errors.count, "error") %> prohibited this platform from being saved:</h2>
+<%= render 'layouts/errordiv', entity: @platform, name:"platform" %>
 
-      <ul>
-      <% @platform.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
+<div class="field">
     <%= f.label :name %><br>
-    <%= f.select :name, options_for_select([['Amazon'],['Flickr'],['Hulu'],['Maxdome'],['Netflix'],['Stream general'],['Vimeo'],['Watchever'],['Youtube']]) %>
-  </div>
-  <div class="field">
+    <%= f.select :name, options_for_select(platform_options) %>
+</div>
+<div class="field">
     <%= f.label :borrowed %><br>
     <%= f.check_box :borrowed %>
-  </div>
-  <div class="field">
+</div>
+<div class="field">
     <%= f.label :borrowedDate %><br>
     <%= f.datetime_select :borrowedDate %>
-  </div>
-  <br>
-  <div class="actions">
+</div>
+<br>
+<div class="actions">
     <%= f.submit %>
-  </div>
-  <br>
+</div>
+<br>
 <% end %>

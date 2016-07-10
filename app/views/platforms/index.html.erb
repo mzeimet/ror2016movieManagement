@@ -1,31 +1,35 @@
 <div class="container">
-<p id="notice"><%= notice %></p>
+    <p id="notice"><%= notice %></p>
 
-<h1>Platforms</h1>
+    <h1>Platforms</h1>
 
-<table class ="table table-condensed table-bordered">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th> # Movies </th>
-      <th> # Borrowed </th>
-      <th></th>
-    </tr>
-  </thead>
+    <table class="table table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>
+                    # Videos
+                </th>
+                <th>
+                    # Borrowed
+                </th>
+                <th></th>
+            </tr>
+        </thead>
 
-  <tbody>
-    <% platform_options().each do |platform_name| %>
-      <% if Platform.where(:name => platform_name).size > 0 %>
-      <% @rows = Platform.where(:name => platform_name) %>
-        <tr>
-          <td><%= platform_name %></td>
-          <td><%= @rows.size %></td>
-          <td><%= @rows.where(:borrowed => true).size %>
-          <td><%= link_to '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'.html_safe, platforms_path() + "?pname=" + platform_name  %></td>
-        </tr>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+        <tbody>
+            <% platform_options().each do |platform_name| %>
+            <% if Platform.where(:name => platform_name).size > 0 %>
+            <% @rows = Platform.where(:name => platform_name) %>
+            <tr>
+                <td><%= platform_name %></td>
+                <td><%= @rows.size %></td>
+                <td><%= @rows.where(:borrowed => true).size %>
+                    <td><%= link_to icon_view, platforms_path() + "?pname=" + platform_name  %></td>
+                </tr>
+                <% end %>
+                <% end %>
+            </tbody>
+        </table>
 
-</div>
+    </div>

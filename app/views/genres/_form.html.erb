@@ -1,17 +1,11 @@
 <%= bootstrap_form_for(@genre) do |f| %>
-<% if @genre.errors.any? %>
-<div id="error_explanation">
-  <div class="alert alert-danger" role="alert">
-    <p id="notice">  <h4><%= pluralize(@genre.errors.count, "error") %> prohibited this genre from being saved</h4>
-    </p>
-  </div>
-</div>
-<% end %>
+<%= render 'layouts/errordiv', entity: @genre, name:"genre" %>
 
 <div class="field">
-  <%= f.text_field :name %>
+    <%= f.text_field :name %>
 </div>
 <div class="actions">
-  <%= f.submit %>
-</div> <br><br>
+    <%= f.submit %>
+</div>
+<br><br>
 <% end %>

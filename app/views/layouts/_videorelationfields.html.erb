@@ -19,10 +19,7 @@
                 </h4>
                 <br>
                 <div class="field">
-                    <%= platform.select :name, options_for_select(platform_options())%>
-                </div>
-                <div class="field">
-                    <%= platform.check_box :borrowed %>
+                    <%= platform.select :name, options_for_select(platform_options())%> <%= platform.check_box :borrowed %> borrowed
                 </div>
                 <div class="field">
                     <%= platform.date_select :borrowedDate ,label:"borrowed until"%>
